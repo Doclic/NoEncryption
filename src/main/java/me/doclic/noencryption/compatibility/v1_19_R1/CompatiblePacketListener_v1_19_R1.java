@@ -30,9 +30,8 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
     @Override
     public void writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
 
-        if (packet instanceof ClientboundPlayerChatPacket) {
+        if (packet instanceof final ClientboundPlayerChatPacket clientboundPlayerChatPacket) {
 
-            final ClientboundPlayerChatPacket clientboundPlayerChatPacket = (ClientboundPlayerChatPacket) packet;
             final Optional<IChatBaseComponent> unsignedContent = clientboundPlayerChatPacket.d();
             if (unsignedContent.isPresent()) {
                 signedContentField.setAccessible(true);
