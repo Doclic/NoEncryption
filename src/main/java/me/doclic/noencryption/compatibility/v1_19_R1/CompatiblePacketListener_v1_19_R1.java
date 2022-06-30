@@ -34,8 +34,12 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
 
             final ClientboundPlayerChatPacket clientboundPlayerChatPacket = (ClientboundPlayerChatPacket) packet;
             final Optional<IChatBaseComponent> unsignedContent = clientboundPlayerChatPacket.d();
-            if (unsignedContent.isPresent())
+            if (unsignedContent.isPresent()) {
+                signedContentField.setAccessible(true);
                 signedContentField.set(clientboundPlayerChatPacket, unsignedContent.get());
+            }
+                
+            saltSignatureField.setAccessible(true);
             saltSignatureField.set(clientboundPlayerChatPacket, null);
 
         }
