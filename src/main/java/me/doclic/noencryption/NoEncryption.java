@@ -18,7 +18,7 @@ public final class NoEncryption extends JavaPlugin {
         } else {
 
             getLogger().severe("Failed to setup NoEncryption's compatibility!");
-            getLogger().severe("Your server version is not compatible with this plugin!");
+            getLogger().severe("Your server version (" + Compatibility.SERVER_VERSION + ") is not compatible with this plugin!");
 
             Bukkit.getPluginManager().disablePlugin(this);
         }

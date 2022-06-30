@@ -12,6 +12,7 @@ public class Compatibility {
     public static final CompatiblePacketListener COMPATIBLE_PACKET_LISTENER;
 
     public static final boolean SERVER_COMPATIBLE;
+    public static final String SERVER_VERSION;
 
     static {
 
@@ -25,6 +26,8 @@ public class Compatibility {
         } catch (ArrayIndexOutOfBoundsException exception) {
             minecraftVersion = null;
         }
+
+        SERVER_VERSION = minecraftVersion;
 
         Bukkit.getLogger().info("Your server is running version " + minecraftVersion);
 
