@@ -21,8 +21,11 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
     public CompatiblePacketListener_v1_19_R1() {
         try {
             signedContentField = ClientboundPlayerChatPacket.class.getDeclaredField("a");
+            signedContentField.setAccessible(true);
             saltSignatureField = ClientboundPlayerChatPacket.class.getDeclaredField("f");
+            saltSignatureField.setAccessible(true);
             modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -36,11 +39,8 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
         if (packet instanceof final ClientboundPlayerChatPacket clientboundPlayerChatPacket) {
             final Optional<IChatBaseComponent> unsignedContent = clientboundPlayerChatPacket.d();
             if (unsignedContent.isPresent()) {
-                signedContentField.setAccessible(true);
                 signedContentField.set(clientboundPlayerChatPacket, unsignedContent.get());
             }
-
-            saltSignatureField.setAccessible(true);
 
             // applying a fix of an issue called "can't set a field, which is final!" beforehand.
             modifiersField.setInt(saltSignatureField, saltSignatureField.getModifiers() & ~Modifier.FINAL);
