@@ -14,12 +14,15 @@ import java.util.Optional;
 
 public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListener {
 
+    // Caching fields
     private Field signedContentField = null;
     private Field saltSignatureField = null;
+    private Field modifiersField = null;
     public CompatiblePacketListener_v1_19_R1() {
         try {
             signedContentField = ClientboundPlayerChatPacket.class.getDeclaredField("a");
             saltSignatureField = ClientboundPlayerChatPacket.class.getDeclaredField("f");
+            modifiersField = Field.class.getDeclaredField("modifiers");
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -40,9 +43,7 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
             saltSignatureField.setAccessible(true);
 
             // applying a fix of an issue called "can't set a field, which is final!" beforehand.
-            Field saltSignatureModifiers = Field.class.getDeclaredField("modifiers");
-            saltSignatureModifiers.setAccessible(true);
-            saltSignatureModifiers.setInt(saltSignatureModifiers, saltSignatureModifiers.getModifiers() & ~Modifier.FINAL);
+            modifiersField.setInt(modifiersField, modifiersField.getModifiers() & ~Modifier.FINAL);
 
             saltSignatureField.set(clientboundPlayerChatPacket, null);
 
