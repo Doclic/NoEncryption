@@ -34,17 +34,12 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
             final Optional<IChatBaseComponent> unsignedContent = clientboundPlayerChatPacket.d();
             if (unsignedContent.isPresent()) {
                 signedContentField.setAccessible(true);
-
-                // applying a fix of an issue called "can't set a field, which is final!" beforehand.
-                Field signedContentModifiers = Field.class.getDeclaredField("modifiers");
-                signedContentModifiers.setAccessible(true);
-                signedContentModifiers.setInt(signedContentModifiers, signedContentModifiers.getModifiers() & ~Modifier.FINAL);
-
                 signedContentField.set(clientboundPlayerChatPacket, unsignedContent.get());
             }
 
             saltSignatureField.setAccessible(true);
 
+            // applying a fix of an issue called "can't set a field, which is final!" beforehand.
             Field saltSignatureModifiers = Field.class.getDeclaredField("modifiers");
             saltSignatureModifiers.setAccessible(true);
             saltSignatureModifiers.setInt(saltSignatureModifiers, saltSignatureModifiers.getModifiers() & ~Modifier.FINAL);
