@@ -1,13 +1,13 @@
 package me.doclic.noencryption.compatibility.v1_19_R1;
 
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.compatibility.CompatiblePacketListener;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
-import org.bukkit.entity.Player;
 
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Optional;
@@ -15,19 +15,19 @@ import java.util.Optional;
 public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListener {
 
     // Caching fields
-    private Field signedContentField = null;
-    private Field saltSignatureField = null;
-    private Field modifiersField = null;
+    private final Field signedContentField;
+    private final Field saltSignatureField;
+    private final VarHandle modifiersHandle;
     public CompatiblePacketListener_v1_19_R1() {
         try {
             signedContentField = ClientboundPlayerChatPacket.class.getDeclaredField("a");
             signedContentField.setAccessible(true);
             saltSignatureField = ClientboundPlayerChatPacket.class.getDeclaredField("f");
             saltSignatureField.setAccessible(true);
-            modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            final MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(Field.class, MethodHandles.lookup());
+            modifiersHandle = lookup.findVarHandle(Field.class, "modifiers", int.class);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -43,7 +43,7 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
             }
 
             // applying a fix of an issue called "can't set a field, which is final!" beforehand.
-            modifiersField.setInt(saltSignatureField, saltSignatureField.getModifiers() & ~Modifier.FINAL);
+            modifiersHandle.set(saltSignatureField, saltSignatureField.getModifiers() & ~Modifier.FINAL);
 
             saltSignatureField.set(clientboundPlayerChatPacket, null);
 
