@@ -1,12 +1,10 @@
 package me.doclic.noencryption.compatibility.v1_19_R1;
 
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.compatibility.CompatiblePacketListener;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
-import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -15,9 +13,9 @@ import java.util.Optional;
 public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListener {
 
     // Caching fields
-    private Field signedContentField = null;
-    private Field saltSignatureField = null;
-    private Field modifiersField = null;
+    private final Field signedContentField;
+    private final Field saltSignatureField;
+    private final Field modifiersField;
     public CompatiblePacketListener_v1_19_R1() {
         try {
             signedContentField = ClientboundPlayerChatPacket.class.getDeclaredField("a");
@@ -27,7 +25,7 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
             modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
