@@ -43,7 +43,7 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
             saltSignatureField.setAccessible(true);
 
             // applying a fix of an issue called "can't set a field, which is final!" beforehand.
-            modifiersField.setInt(modifiersField, modifiersField.getModifiers() & ~Modifier.FINAL);
+            modifiersField.setInt(saltSignatureField, saltSignatureField.getModifiers() & ~Modifier.FINAL);
 
             saltSignatureField.set(clientboundPlayerChatPacket, null);
 
