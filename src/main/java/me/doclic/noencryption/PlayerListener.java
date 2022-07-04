@@ -1,6 +1,10 @@
 package me.doclic.noencryption;
 
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.compatibility.Compatibility;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,18 +25,16 @@ public class PlayerListener implements Listener {
             @Override
             public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
 
-                Compatibility.COMPATIBLE_PACKET_LISTENER.readPacket(channelHandlerContext, packet);
-
-                super.channelRead(channelHandlerContext, packet);
+                Object newPacket = Compatibility.COMPATIBLE_PACKET_LISTENER.readPacket(channelHandlerContext, packet);
+                super.channelRead(channelHandlerContext, newPacket);
 
             }
 
             @Override
             public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
 
-                Compatibility.COMPATIBLE_PACKET_LISTENER.writePacket(channelHandlerContext, packet, promise);
-
-                super.write(channelHandlerContext, packet, promise);
+                Object newPacket = Compatibility.COMPATIBLE_PACKET_LISTENER.writePacket(channelHandlerContext, packet, promise);
+                super.write(channelHandlerContext, newPacket, promise);
 
             }
 

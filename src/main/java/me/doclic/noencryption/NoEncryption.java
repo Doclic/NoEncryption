@@ -15,6 +15,9 @@ public final class NoEncryption extends JavaPlugin {
 
             getLogger().info("Compatibility successful!");
 
+            getLogger().info("If you used /reload to update NoEncryption, your players need to");
+            getLogger().info("disconnect and join back");
+
         } else {
 
             getLogger().severe("Failed to setup NoEncryption's compatibility!");

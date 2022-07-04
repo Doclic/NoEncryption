@@ -5,8 +5,14 @@ import io.netty.channel.ChannelPromise;
 
 public interface CompatiblePacketListener {
 
-    void readPacket(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception;
+    /**
+     * @return the packet that should be read
+     */
+    Object readPacket(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception;
 
-    void writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception;
+    /**
+     * @return the packet that should be written
+     */
+    Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception;
 
 }
