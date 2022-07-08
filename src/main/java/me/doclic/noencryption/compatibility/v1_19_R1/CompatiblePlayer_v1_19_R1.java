@@ -10,7 +10,7 @@ public class CompatiblePlayer_v1_19_R1 implements CompatiblePlayer {
     @Override
     public Channel getChannel(Player player) {
 
-        return ((CraftPlayer) player).getHandle().b.b.m; // couldn't get mojang mappings to work
+        return ((CraftPlayer) player).getHandle().connection.connection.channel;
 
     }
 

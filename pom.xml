@@ -12,6 +12,7 @@
     <name>NoEncryption</name>
 
     <description>Makes every player message a system message</description>
+
     <properties>
         <java.version>1.17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,8 +25,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -40,6 +41,39 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.md-5</groupId>
+                <artifactId>specialsource-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>remap</goal>
+                        </goals>
+                        <id>remap-obf</id>
+                        <configuration>
+                            <srgIn>org.spigotmc:minecraft-server:1.19-R0.1-SNAPSHOT:txt:maps-mojang</srgIn>
+                            <reverse>true</reverse>
+                            <remappedDependencies>org.spigotmc:spigot:1.19-R0.1-SNAPSHOT:jar:remapped-mojang</remappedDependencies>
+                            <remappedArtifactAttached>true</remappedArtifactAttached>
+                            <remappedClassifierName>remapped-obf</remappedClassifierName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>remap</goal>
+                        </goals>
+                        <id>remap-spigot</id>
+                        <configuration>
+                            <inputFile>${project.build.directory}/${project.artifactId}-${project.version}-remapped-obf.jar</inputFile>
+                            <srgIn>org.spigotmc:minecraft-server:1.19-R0.1-SNAPSHOT:csrg:maps-spigot</srgIn>
+                            <remappedDependencies>org.spigotmc:spigot:1.19-R0.1-SNAPSHOT:jar:remapped-obf</remappedDependencies>
                         </configuration>
                     </execution>
                 </executions>
@@ -76,6 +110,7 @@
             <artifactId>spigot</artifactId>
             <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+            <classifier>remapped-mojang</classifier>
         </dependency>
     </dependencies>
 </project>
