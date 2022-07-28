@@ -22,7 +22,7 @@ public class CompatiblePacketListener_v1_19_R1 implements CompatiblePacketListen
             final Component unsignedContentWithFallback = unsignedContent.orElse(clientboundPlayerChatPacket.message().signedContent().decorated());
             final ChatMessageContent serverCont = new ChatMessageContent(unsignedContentWithFallback.getString(), unsignedContentWithFallback);
             
-			// recreate a new packet
+            // recreate a new packet
             return new ClientboundPlayerChatPacket(PlayerChatMessage.system(serverCont), clientboundPlayerChatPacket.chatType());
         }
 
