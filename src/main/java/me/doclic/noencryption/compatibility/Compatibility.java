@@ -14,22 +14,31 @@ public class Compatibility {
     public static final boolean SERVER_COMPATIBLE;
     public static final String SERVER_VERSION;
 
+    public static final String COMPATIBLE_VERSION;
+    public static final String BUKKIT_VERSION;
+
     static {
 
+        COMPATIBLE_VERSION = "1.19.1-R0.1-SNAPSHOT";
+
         String minecraftVersion;
+        String bukkitVersion;
 
         try {
 
             minecraftVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3]; // Gets the server version
+            bukkitVersion = Bukkit.getBukkitVersion(); // Gets the Bukkit version
 
 
         } catch (ArrayIndexOutOfBoundsException exception) {
             minecraftVersion = null;
+            bukkitVersion = null;
         }
 
         SERVER_VERSION = minecraftVersion;
+        BUKKIT_VERSION = bukkitVersion;
 
-        Bukkit.getLogger().info("Your server is running version " + minecraftVersion);
+        Bukkit.getLogger().info("Your server is running version " + bukkitVersion);
 
         if (minecraftVersion != null) {
 
