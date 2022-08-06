@@ -19,7 +19,7 @@ public class Compatibility {
 
     static {
 
-        COMPATIBLE_VERSION = "1.19.1-R0.1-SNAPSHOT";
+        COMPATIBLE_VERSION = "1.19.2-R0.1-SNAPSHOT";
 
         String minecraftVersion;
         String bukkitVersion;
