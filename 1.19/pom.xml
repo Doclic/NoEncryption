@@ -86,7 +86,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>1.19/src/main/resources</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
