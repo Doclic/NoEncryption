@@ -36,8 +36,6 @@ public class Compatibility {
 
         if (minecraftVersion != null && minecraftVersion.equals(PLUGIN_COMPATIBLE_VERSION)) {
 
-            final String versionPackage = getVersionPackage(minecraftVersion);
-
             COMPATIBLE_PLAYER = instantiate(CompatiblePlayer.class);
             COMPATIBLE_PACKET_LISTENER = instantiate(CompatiblePacketListener.class);
 
@@ -51,12 +49,6 @@ public class Compatibility {
             SERVER_COMPATIBLE = false;
 
         }
-
-    }
-
-    private static String getVersionPackage(String minecraftVersion) {
-
-        return Compatibility.class.getPackage().getName();
 
     }
 
