@@ -11,6 +11,7 @@ public class Compatibility {
     public static final CompatiblePlayer COMPATIBLE_PLAYER;
     public static final CompatiblePacketListener COMPATIBLE_PACKET_LISTENER;
 
+    public static final String PLUGIN_COMPATIBLE_VERSION;
     public static final boolean SERVER_COMPATIBLE;
     public static final String SERVER_VERSION;
 
@@ -18,9 +19,11 @@ public class Compatibility {
 
         String minecraftVersion;
 
+        PLUGIN_COMPATIBLE_VERSION = "1.19-R0.1-SNAPSHOT";
+
         try {
 
-            minecraftVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3]; // Gets the server version
+            minecraftVersion = Bukkit.getBukkitVersion();
 
 
         } catch (ArrayIndexOutOfBoundsException exception) {
@@ -31,7 +34,7 @@ public class Compatibility {
 
         Bukkit.getLogger().info("Your server is running version " + minecraftVersion);
 
-        if (minecraftVersion != null) {
+        if (minecraftVersion != null && minecraftVersion.equals(PLUGIN_COMPATIBLE_VERSION)) {
 
             final String versionPackage = getVersionPackage(minecraftVersion);
 
@@ -53,14 +56,14 @@ public class Compatibility {
 
     private static String getVersionPackage(String minecraftVersion) {
 
-        return Compatibility.class.getPackage().getName() + "." + minecraftVersion;
+        return Compatibility.class.getPackage().getName();
 
     }
 
     private static <T> Class<? extends T> getCompatibleClass(Class<T> clazz, String minecraftVersion, String versionPackage) {
 
         try {
-            final Class<?> compatibleClass = Class.forName(versionPackage + "." + clazz.getSimpleName() + "_" + minecraftVersion);
+            final Class<?> compatibleClass = Class.forName(versionPackage + "." + clazz.getSimpleName());
             if (compatibleClass.getSuperclass() != clazz && !Arrays.asList(compatibleClass.getInterfaces()).contains(clazz)) {
                 return null;
             }
