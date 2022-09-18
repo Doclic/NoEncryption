@@ -20,6 +20,7 @@
     <modules>
         <module>1.19</module>
         <module>1.19.1</module>
+        <module>1.19.2</module>
     </modules>
 
     <build>
