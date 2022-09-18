@@ -1,4 +1,5 @@
 name: NoEncryption
+provides: [ ChatSignatures ]
 version: '${project.parent.version}'
 main: me.doclic.noencryption.NoEncryption
 api-version: 1.19
