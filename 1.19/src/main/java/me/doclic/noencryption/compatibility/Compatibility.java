@@ -36,10 +36,8 @@ public class Compatibility {
 
         if (minecraftVersion != null && minecraftVersion.equals(PLUGIN_COMPATIBLE_VERSION)) {
 
-            final String versionPackage = getVersionPackage(minecraftVersion);
-
-            COMPATIBLE_PLAYER = instantiate(getCompatibleClass(CompatiblePlayer.class, minecraftVersion, versionPackage));
-            COMPATIBLE_PACKET_LISTENER = instantiate(getCompatibleClass(CompatiblePacketListener.class, minecraftVersion, versionPackage));
+            COMPATIBLE_PLAYER = instantiate(CompatiblePlayer.class);
+            COMPATIBLE_PACKET_LISTENER = instantiate(CompatiblePacketListener.class);
 
             SERVER_COMPATIBLE = true;
 
@@ -50,28 +48,6 @@ public class Compatibility {
 
             SERVER_COMPATIBLE = false;
 
-        }
-
-    }
-
-    private static String getVersionPackage(String minecraftVersion) {
-
-        return Compatibility.class.getPackage().getName();
-
-    }
-
-    private static <T> Class<? extends T> getCompatibleClass(Class<T> clazz, String minecraftVersion, String versionPackage) {
-
-        try {
-            final Class<?> compatibleClass = Class.forName(versionPackage + "." + clazz.getSimpleName());
-            if (compatibleClass.getSuperclass() != clazz && !Arrays.asList(compatibleClass.getInterfaces()).contains(clazz)) {
-                return null;
-            }
-            else
-                //noinspection unchecked
-                return (Class<? extends T>) compatibleClass;
-        } catch (ClassNotFoundException e) {
-            return null;
         }
 
     }
