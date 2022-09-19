@@ -31,7 +31,7 @@ public enum ConfigNodes {
             "# |                                                          |",
             "# |==========================================================|",
             " "),
-    FRIENDLY_DEV("Test notice", "fun.friendly_dev", false,
+    FRIENDLY_DEV(null, "fun.friendly_dev", false,
             " ",
             "# Allows a user to become friends with the devs",
             "# ",
@@ -44,7 +44,7 @@ public enum ConfigNodes {
     private final String Notice;
     private final String Root;
     private final Object Default;
-    private String[] comments;
+    private final String[] comments;
 
     ConfigNodes(String notice, String root, Object def, String... comments) {
 
