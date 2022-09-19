@@ -1,8 +1,12 @@
 package me.doclic.noencryption;
 
 import me.doclic.noencryption.compatibility.Compatibility;
+import me.doclic.noencryption.config.ConfigurationHandler;
+import me.doclic.noencryption.utils.FileMgmt;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Level;
 
 public final class NoEncryption extends JavaPlugin {
 
@@ -10,6 +14,17 @@ public final class NoEncryption extends JavaPlugin {
     public void onEnable() {
 
         if (Compatibility.SERVER_COMPATIBLE) {
+
+            FileMgmt.initialize(this);
+            ConfigurationHandler.initialize(this);
+
+            if (!ConfigurationHandler.loadSettings()) {
+                getLogger().severe("Configuration could not be loaded, disabling...");
+                Bukkit.getPluginManager().disablePlugin(this);
+                return;
+            }
+
+            ConfigurationHandler.printChanges();
 
             Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
@@ -26,5 +41,9 @@ public final class NoEncryption extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
+    }
+
+    public String getRootFolder() {
+        return this.getDataFolder().getPath();
     }
 }
