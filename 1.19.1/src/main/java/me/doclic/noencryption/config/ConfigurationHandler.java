@@ -175,6 +175,10 @@ public class ConfigurationHandler {
         }
     }
 
+    public static String getLoginProtectionMessage() {
+        return getString(ConfigNodes.LOGIN_PROTECTION_MESSAGE);
+    }
+
    /* public static String getDBTablePrefix() {
         return getString(ConfigNodes.DATABASE_TABLE_PREFIX);
     }

@@ -6,6 +6,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.compatibility.Compatibility;
+import me.doclic.noencryption.config.ConfigurationHandler;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,6 +41,14 @@ public class PlayerListener implements Listener {
             }
 
         });
+
+        if (ConfigurationHandler.getLoginProtectionMessage() != null) {
+            if (!ConfigurationHandler.getLoginProtectionMessage().trim().equals("")) {
+                player.sendMessage(
+                        LegacyComponentSerializer.legacy('&').deserialize(ConfigurationHandler.getLoginProtectionMessage())
+                );
+            }
+        }
 
     }
 
