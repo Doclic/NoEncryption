@@ -38,7 +38,16 @@ public enum ConfigNodes {
             "# Note: Doesn't actually do anything, just here",
             "#       for show, and example",
             "# Added in v3.0",
-            "# Default: false");
+            "# Default: false"),
+
+    LOGIN_PROTECTION_MESSAGE(null, "login_protection_message", "",
+            " ",
+            "# Displays a message to users when they log in that their messages are protected",
+            "# ",
+            "# Note: Leave blank to disable",
+            "# ",
+            "# Added in v3.0",
+            "# Default: BLANK");
 
 
     private final String Notice;
