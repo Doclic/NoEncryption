@@ -29,7 +29,12 @@ public class FileMgmt {
         return System.getProperty("file.separator");
     }
 
-    public static File CheckYMLExists(File file) {
+    public static boolean CheckYMLExists(File file) {
+
+        return file.exists();
+    }
+
+    public static File createNewFile(File file) {
 
         if (!file.exists()) {
             try {

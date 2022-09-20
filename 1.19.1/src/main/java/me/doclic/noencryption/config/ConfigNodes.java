@@ -1,8 +1,8 @@
 package me.doclic.noencryption.config;
 
 public enum ConfigNodes {
-    HEADER(null, "fun", "",
-             " ",
+    HEADER(null, "fun", null,
+            " ",
             "# |==========================================================|",
             "# |                                                          |",
             "# |           NoEncryption Dynamic Configuration             |",
@@ -89,6 +89,16 @@ public enum ConfigNodes {
      * @return The default value for a config path
      */
     public Object getDefault() {
+
+        return (Default == null ? "" : Default);
+    }
+
+    /**
+     * Retrieves the default value for a config path, or null if there is none
+     *
+     * @return The default value for a config path, or null if there is none
+     */
+    public Object getDefaultOrNull() {
 
         return Default;
     }
