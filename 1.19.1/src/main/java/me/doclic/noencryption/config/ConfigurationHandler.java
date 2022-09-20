@@ -3,7 +3,6 @@ package me.doclic.noencryption.config;
 import me.doclic.noencryption.NoEncryption;
 import me.doclic.noencryption.utils.CommentedConfiguration;
 import me.doclic.noencryption.utils.FileMgmt;
-import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.util.HashMap;
@@ -14,6 +13,7 @@ public class ConfigurationHandler {
     private static CommentedConfiguration config, newConfig;
     private static HashMap<String, Object> newOptions;
     private static HashMap<String, String> messages;
+    private static boolean firstConfig;
 
     public static void initialize(NoEncryption main) {
         ConfigurationHandler.main = main;
@@ -31,21 +31,24 @@ public class ConfigurationHandler {
 
     private static boolean loadConfig() {
         String filepath = main.getRootFolder() + FileMgmt.fileSeparator() + "settings" + FileMgmt.fileSeparator() + "config.yml";
+        firstConfig = !FileMgmt.CheckYMLExists(new File(filepath));
 
-        File file = FileMgmt.CheckYMLExists(new File(filepath));
-        if (file != null) {
-
-            // read the config.yml into memory
-            config = new CommentedConfiguration(file);
-            if (!config.load()) {
-                main.getLogger().log(Level.SEVERE, "Failed to load config.yml");
-                return false;
-            }
-
-            setDefaults(file);
-
-            config.save();
+        File file = new File(filepath);
+        if (firstConfig) {
+            FileMgmt.createNewFile(file);
         }
+
+        // read the config.yml into memory
+        config = new CommentedConfiguration(file);
+        if (!config.load()) {
+            main.getLogger().log(Level.SEVERE, "Failed to load config.yml");
+            return false;
+        }
+
+        setDefaults(file);
+
+        config.save();
+
         return true;
     }
 
@@ -64,7 +67,7 @@ public class ConfigurationHandler {
 
             setNewProperty(root.getRoot(), (config.get(root.getRoot().toLowerCase()) != null) ? config.get(root.getRoot().toLowerCase()) : root.getDefault());
 
-            if (config != null && !config.getKeys(true).contains(root.getRoot()) && !root.getDefault().equals("")) {
+            if (!firstConfig && !config.getKeys(true).contains(root.getRoot()) && root.getDefaultOrNull() != null) {
                 newOptions.put(root.getRoot(), root.getDefault());
             }
 
@@ -178,56 +181,4 @@ public class ConfigurationHandler {
     public static String getLoginProtectionMessage() {
         return getString(ConfigNodes.LOGIN_PROTECTION_MESSAGE);
     }
-
-   /* public static String getDBTablePrefix() {
-        return getString(ConfigNodes.DATABASE_TABLE_PREFIX);
-    }
-
-    public static String getLoadDBType() {
-        return getString(ConfigNodes.DATABASE_LOAD_TYPE).toLowerCase();
-    }
-
-    public static String getLoadDBHostname() {
-        return getString(ConfigNodes.DATABASE_LOAD_HOSTNAME);
-    }
-
-    public static String getLoadDBPort() {
-        return getString(ConfigNodes.DATABASE_LOAD_PORT);
-    }
-
-    public static String getLoadDBSchemaName() {
-        return getString(ConfigNodes.DATABASE_LOAD_SCHEMA_NAME);
-    }
-
-    public static String getLoadDBUsername() {
-        return getString(ConfigNodes.DATABASE_LOAD_USERNAME);
-    }
-
-    public static String getLoadDBPassword() {
-        return getString(ConfigNodes.DATABASE_LOAD_PASSWORD);
-    }
-
-    public static String getSaveDBType() {
-        return getString(ConfigNodes.DATABASE_SAVE_TYPE).toLowerCase();
-    }
-
-    public static String getSaveDBHostname() {
-        return getString(ConfigNodes.DATABASE_SAVE_HOSTNAME);
-    }
-
-    public static String getSaveDBPort() {
-        return getString(ConfigNodes.DATABASE_SAVE_PORT);
-    }
-
-    public static String getSaveDBSchemaName() {
-        return getString(ConfigNodes.DATABASE_SAVE_SCHEMA_NAME);
-    }
-
-    public static String getSaveDBUsername() {
-        return getString(ConfigNodes.DATABASE_SAVE_USERNAME);
-    }
-
-    public static String getSaveDBPassword() {
-        return getString(ConfigNodes.DATABASE_SAVE_PASSWORD);
-    }*/
 }
