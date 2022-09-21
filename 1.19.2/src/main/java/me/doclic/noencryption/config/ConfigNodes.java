@@ -47,7 +47,16 @@ public enum ConfigNodes {
             "# Note: Leave blank to disable",
             "# ",
             "# Added in v3.0",
-            "# Default: BLANK");
+            "# Default: BLANK"),
+
+    FORWARD_UUID(null, "forward_uuid", false,
+            " ",
+            "# Forwards UUIDs of message senders. This may improve functionality of some client-side mods/plugins",
+            "# ",
+            "# Note: Enabling this option may cause chat messages to not be fully stripped, thus showing the red bar, and red exclamation mark",
+            "# ",
+            "# Added in v3.1",
+            "# Default: false");
 
 
     private final String Notice;
