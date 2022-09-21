@@ -2,6 +2,7 @@ package me.doclic.noencryption.compatibility;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
+import me.doclic.noencryption.config.ConfigurationHandler;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatHeaderPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
@@ -28,7 +29,7 @@ public class CompatiblePacketListener {
                     new PlayerChatMessage(
                             new SignedMessageHeader(
                                     new MessageSignature(new byte[0]),
-                                    new UUID(0, 0)),
+                                    (ConfigurationHandler.getForwardUUID() ? clientboundPlayerChatPacket.message().signedHeader().sender() : new UUID(0, 0))),
                             new MessageSignature(new byte[0]),
                             new SignedMessageBody(
                                     new ChatMessageContent(
