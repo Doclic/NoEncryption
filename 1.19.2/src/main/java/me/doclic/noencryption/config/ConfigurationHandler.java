@@ -181,4 +181,8 @@ public class ConfigurationHandler {
     public static String getLoginProtectionMessage() {
         return getString(ConfigNodes.LOGIN_PROTECTION_MESSAGE);
     }
+
+    public static boolean getForwardUUID() {
+        return getBoolean(ConfigNodes.FORWARD_UUID);
+    }
 }
