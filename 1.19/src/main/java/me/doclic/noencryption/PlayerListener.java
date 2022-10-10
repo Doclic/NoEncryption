@@ -1,13 +1,8 @@
 package me.doclic.noencryption;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelDuplexHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.ChannelPromise;
+import io.netty.channel.*;
 import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -44,9 +39,21 @@ public class PlayerListener implements Listener {
 
         if (ConfigurationHandler.getLoginProtectionMessage() != null) {
             if (!ConfigurationHandler.getLoginProtectionMessage().trim().equals("")) {
-                player.sendMessage(
-                        LegacyComponentSerializer.legacy('&').deserialize(ConfigurationHandler.getLoginProtectionMessage())
-                );
+                if (NoEncryption.getNewChat()) {
+                    try {
+                        player.sendMessage(
+                                net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacy('&').deserialize(ConfigurationHandler.getLoginProtectionMessage())
+                        );
+                    } catch (Exception ex) {
+                        player.sendMessage(
+                                org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigurationHandler.getLoginProtectionMessage())
+                        );
+                    }
+                } else {
+                    player.sendMessage(
+                            org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigurationHandler.getLoginProtectionMessage())
+                    );
+                }
             }
         }
 
