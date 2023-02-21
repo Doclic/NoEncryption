@@ -8,8 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NoEncryption extends JavaPlugin {
 
-    private static boolean newChat = false;
-
     @Override
     public void onEnable() {
 
@@ -25,8 +23,6 @@ public final class NoEncryption extends JavaPlugin {
             }
 
             ConfigurationHandler.printChanges();
-
-            newChat = checkForNewChat();
 
             Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
@@ -49,7 +45,7 @@ public final class NoEncryption extends JavaPlugin {
         return this.getDataFolder().getPath();
     }
 
-    private boolean checkForNewChat() {
+    public static boolean usesKyoriChat() {
         try {
             Class.forName("net.kyori.adventure.Adventure");
 
@@ -57,9 +53,5 @@ public final class NoEncryption extends JavaPlugin {
         } catch (ClassNotFoundException e) {
             return false;
         }
-    }
-
-    public static boolean getNewChat() {
-        return newChat;
     }
 }

@@ -39,21 +39,7 @@ public class PlayerListener implements Listener {
 
         if (ConfigurationHandler.getLoginProtectionMessage() != null) {
             if (!ConfigurationHandler.getLoginProtectionMessage().trim().equals("")) {
-                if (NoEncryption.getNewChat()) {
-                    try {
-                        player.sendMessage(
-                                net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacy('&').deserialize(ConfigurationHandler.getLoginProtectionMessage())
-                        );
-                    } catch (Exception ex) {
-                        player.sendMessage(
-                                org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigurationHandler.getLoginProtectionMessage())
-                        );
-                    }
-                } else {
-                    player.sendMessage(
-                            org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigurationHandler.getLoginProtectionMessage())
-                    );
-                }
+                Chat.sendChat(player, ConfigurationHandler.getLoginProtectionMessage());
             }
         }
 
