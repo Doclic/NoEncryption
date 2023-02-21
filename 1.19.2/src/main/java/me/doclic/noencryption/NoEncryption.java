@@ -41,6 +41,24 @@ public final class NoEncryption extends JavaPlugin {
 
             logger().info("If you used /reload to update NoEncryption, your players need to disconnect and join back");
 
+            if (Bukkit.getPluginManager().getPlugin("Essentials") != null) {
+                logger().info("=====================================================================");
+                logger().info("We are aware of the Essentials warning about severe issues.");
+                logger().info("Currently, there are no known issues relating to NoEncryption and Essentials.");
+                logger().info("If you encounter any issues, please create an issue on the NoEncryption GitHub at");
+                logger().info("https://github.com/Doclic/NoEncryption/issues");
+                logger().info("This message can be safely ignored.");
+            }
+
+            if (Bukkit.getPluginManager().getPlugin("ViaVersion") != null) {
+                logger().info("=====================================================================");
+                logger().info("We are aware of the ViaVersion warning about severe issues.");
+                logger().info("Currently, there are no known issues relating to NoEncryption and ViaVersion.");
+                logger().info("If you encounter any issues, please create an issue on the NoEncryption GitHub at");
+                logger().info("https://github.com/Doclic/NoEncryption/issues");
+                logger().info("This message can be safely ignored.");
+            }
+
             InternalMetrics.insertChart(new Metrics.SimplePie("enabledDisabled", () -> "Enabled"));
 
         } else {
