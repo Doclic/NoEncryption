@@ -3,6 +3,8 @@ package me.doclic.noencryption.compatibility;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.config.ConfigurationHandler;
+import me.doclic.noencryption.utils.InternalMetrics;
+import me.doclic.noencryption.utils.Metrics;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.protocol.game.*;
 import org.bukkit.Bukkit;
@@ -21,6 +23,8 @@ public class CompatiblePacketListener {
             final String plainText = clientboundPlayerChatPacket.body().content();
             final Component textComponent = Component.literal(plainText);
             Optional<ChatType.Bound> chatType = clientboundPlayerChatPacket.chatType().resolve(((CraftServer) Bukkit.getServer()).getServer().registryAccess());
+
+            InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
 
             return new ClientboundSystemChatPacket(
                     chatType.orElseThrow().decorate(textComponent),

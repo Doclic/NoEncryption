@@ -2,6 +2,8 @@ package me.doclic.noencryption.compatibility;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
+import me.doclic.noencryption.utils.InternalMetrics;
+import me.doclic.noencryption.utils.Metrics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
 import net.minecraft.util.Crypt.SaltSignaturePair;
@@ -15,6 +17,8 @@ public class CompatiblePacketListener {
     public Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
         if (packet instanceof final ClientboundPlayerChatPacket clientboundPlayerChatPacket) {
             final Optional<Component> unsignedContent = clientboundPlayerChatPacket.unsignedContent();
+
+            InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
 
             // recreate a new packet
             return new ClientboundPlayerChatPacket(

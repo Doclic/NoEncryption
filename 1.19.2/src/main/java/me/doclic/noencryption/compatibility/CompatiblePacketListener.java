@@ -3,6 +3,8 @@ package me.doclic.noencryption.compatibility;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.config.ConfigurationHandler;
+import me.doclic.noencryption.utils.InternalMetrics;
+import me.doclic.noencryption.utils.Metrics;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatHeaderPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
@@ -24,6 +26,8 @@ public class CompatiblePacketListener {
             final ChatMessageContent signedContent = message.signedContent();
             final SignedMessageBody signedBody = message.signedBody();
             final ChatType.BoundNetwork chatType = clientboundPlayerChatPacket.chatType();
+
+            InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
 
             // recreate a new packet
             return new ClientboundPlayerChatPacket(
@@ -47,6 +51,8 @@ public class CompatiblePacketListener {
             if (clientboundSystemChatPacket.content() == null) {
                 return clientboundSystemChatPacket;
             } else {
+                InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
+
                 // recreate a new packet
                 return new ClientboundSystemChatPacket(
                         CraftChatMessage.fromJSONOrNull(clientboundSystemChatPacket.content()),
@@ -62,6 +68,8 @@ public class CompatiblePacketListener {
                     clientboundPlayerChatHeaderPacket.bodyDigest()
             );
         } else if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
+            InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
+
             if (ConfigurationHandler.getDisableBanner()) {
                 // recreate a new packet
                 return new ClientboundServerDataPacket(

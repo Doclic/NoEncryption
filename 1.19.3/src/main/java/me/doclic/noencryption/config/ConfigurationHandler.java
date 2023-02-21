@@ -185,4 +185,8 @@ public class ConfigurationHandler {
     public static boolean getDisableBanner() {
         return getBoolean(ConfigNodes.DISABLE_BANNER);
     }
+
+    public static boolean bStatsEnabled() {
+        return getBoolean(ConfigNodes.BSTATS_ENABLED);
+    }
 }

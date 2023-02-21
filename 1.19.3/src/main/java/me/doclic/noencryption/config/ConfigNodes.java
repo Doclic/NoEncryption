@@ -66,6 +66,15 @@ public enum ConfigNodes {
             "# Disabled the modified chats banner on the top right of the client",
             "# ",
             "# Added in v3.2",
+            "# Default: true"),
+
+    BSTATS_ENABLED(null, "bstats_enabled", true,
+            " ",
+            "# Allows us to collect certain statistical data such as what version your server is, what version NoEncryption is, how many messages have been re-wrote, etc.",
+            "# ",
+            "# Note: This does not send sensitive information such as IP, chat keys, chat messages, etc.",
+            "# ",
+            "# Added in v4.1",
             "# Default: true");
 
 

@@ -181,4 +181,8 @@ public class ConfigurationHandler {
     public static String getLoginProtectionMessage() {
         return getString(ConfigNodes.LOGIN_PROTECTION_MESSAGE);
     }
+
+    public static boolean bStatsEnabled() {
+        return getBoolean(ConfigNodes.BSTATS_ENABLED);
+    }
 }
