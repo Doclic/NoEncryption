@@ -16,7 +16,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class CompatiblePacketListener {
-
     public Object readPacket(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception { return packet; }
 
     public Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
@@ -47,7 +46,9 @@ public class CompatiblePacketListener {
                             new FilterMask(0)
                     ),
                     chatType);
-        } else if (packet instanceof final ClientboundSystemChatPacket clientboundSystemChatPacket) {
+        }
+
+        if (packet instanceof final ClientboundSystemChatPacket clientboundSystemChatPacket) {
             if (clientboundSystemChatPacket.content() == null) {
                 return clientboundSystemChatPacket;
             } else {
@@ -58,7 +59,9 @@ public class CompatiblePacketListener {
                         CraftChatMessage.fromJSONOrNull(clientboundSystemChatPacket.content()),
                         clientboundSystemChatPacket.overlay());
             }
-        } else if (packet instanceof final ClientboundPlayerChatHeaderPacket clientboundPlayerChatHeaderPacket) {
+        }
+
+        if (packet instanceof final ClientboundPlayerChatHeaderPacket clientboundPlayerChatHeaderPacket) {
             // recreate a new packet
             return new ClientboundPlayerChatHeaderPacket(
                     new SignedMessageHeader(
@@ -67,7 +70,9 @@ public class CompatiblePacketListener {
                     new MessageSignature(new byte[0]),
                     clientboundPlayerChatHeaderPacket.bodyDigest()
             );
-        } else if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
+        }
+
+        if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
             InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
 
             if (ConfigurationHandler.getDisableBanner()) {
@@ -82,7 +87,5 @@ public class CompatiblePacketListener {
         }
 
         return packet;
-
     }
-
 }

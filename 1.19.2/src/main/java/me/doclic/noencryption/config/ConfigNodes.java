@@ -39,7 +39,6 @@ public enum ConfigNodes {
             "#       for show, and example",
             "# Added in v3.0",
             "# Default: false"),
-
     LOGIN_PROTECTION_MESSAGE(null, "login_protection_message", "",
             " ",
             "# Displays a message to users when they log in that their messages are protected",
@@ -48,7 +47,6 @@ public enum ConfigNodes {
             "# ",
             "# Added in v3.0",
             "# Default: BLANK"),
-
     FORWARD_UUID(null, "forward_uuid", false,
             " ",
             "# Forwards UUIDs of message senders. This may improve functionality of some client-side mods/plugins",
@@ -57,14 +55,12 @@ public enum ConfigNodes {
             "# ",
             "# Added in v3.1",
             "# Default: false"),
-
     DISABLE_BANNER(null, "disable_banner", true,
             " ",
             "# Disabled the modified chats banner on the top right of the client",
             "# ",
             "# Added in v3.2",
             "# Default: true"),
-
     BSTATS_ENABLED(null, "bstats_enabled", true,
             " ",
             "# Allows us to collect certain statistical data such as what version your server is, what version NoEncryption is, how many messages have been re-wrote, etc.",
@@ -74,14 +70,12 @@ public enum ConfigNodes {
             "# Added in v4.1",
             "# Default: true");
 
-
     private final String Notice;
     private final String Root;
     private final Object Default;
     private final String[] comments;
 
     ConfigNodes(String notice, String root, Object def, String... comments) {
-
         this.Notice = notice;
         this.Root = root;
         this.Default = def;
@@ -94,7 +88,6 @@ public enum ConfigNodes {
      * @return The root for a config option
      */
     public String getNotice() {
-
         return (Notice != null ? Notice.trim() : null);
     }
 
@@ -104,7 +97,6 @@ public enum ConfigNodes {
      * @return The root for a config option
      */
     public String getRoot() {
-
         return Root;
     }
 
@@ -114,7 +106,6 @@ public enum ConfigNodes {
      * @return The default value for a config path
      */
     public Object getDefault() {
-
         return (Default == null ? "" : Default);
     }
 
@@ -124,7 +115,6 @@ public enum ConfigNodes {
      * @return The default value for a config path, or null if there is none
      */
     public Object getDefaultOrNull() {
-
         return Default;
     }
 
@@ -134,7 +124,6 @@ public enum ConfigNodes {
      * @return The comments for a config path
      */
     public String[] getComments() {
-
         if (comments != null) {
             return comments;
         }

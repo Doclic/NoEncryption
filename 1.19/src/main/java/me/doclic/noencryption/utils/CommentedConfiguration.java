@@ -18,7 +18,6 @@ import java.util.HashMap;
  * @author dumptruckman, LlmDL & Articdive
  */
 public class CommentedConfiguration extends YamlConfiguration {
-
     private final DumperOptions yamlOptions = new DumperOptions();
     private final Representer yamlRepresenter = new YamlRepresenter();
     private final Yaml yaml = new Yaml(new YamlConstructor(), yamlRepresenter, yamlOptions);
@@ -26,7 +25,6 @@ public class CommentedConfiguration extends YamlConfiguration {
     private File file;
 
     public CommentedConfiguration(File file) {
-
         super();
         //this.load(file);
         comments = new HashMap<>();
@@ -34,7 +32,6 @@ public class CommentedConfiguration extends YamlConfiguration {
     }
 
     public boolean load() {
-
         boolean loaded = true;
 
         try {
@@ -47,7 +44,6 @@ public class CommentedConfiguration extends YamlConfiguration {
     }
 
     public void save() {
-
         boolean saved = true;
 
         // Save the config just like normal
@@ -57,7 +53,6 @@ public class CommentedConfiguration extends YamlConfiguration {
              * cap strings at 80 characters long, forming new lines in some of our longer strings (channel_formats.)
              */
             this.save(file);
-
         } catch (Exception e) {
             saved = false;
         }
@@ -140,14 +135,10 @@ public class CommentedConfiguration extends YamlConfiguration {
                             }
                             //currentPath = currentPath.replace(currentPath.substring(currentPath.lastIndexOf(".")), "");
                             currentPath += line.substring(whiteSpace, index);
-
                         }
-
                     }
-
                 } else
                     node = false;
-
                 if (node) {
                     String comment;
                     // If there's a comment for the current path, retrieve it and flag that path as already commented
@@ -162,7 +153,6 @@ public class CommentedConfiguration extends YamlConfiguration {
                 }
                 // Add the (modified) line to the total config String
                 newContents.append(line).append((!node) ? System.getProperty("line.separator") : "");
-
             }
             /*
              * Due to a bukkit bug we need to strip any extra new lines from the
@@ -184,7 +174,6 @@ public class CommentedConfiguration extends YamlConfiguration {
      * @param commentLines Comments to add. One String per line.
      */
     public void addComment(String path, String... commentLines) {
-
         StringBuilder commentstring = new StringBuilder();
         StringBuilder leadingSpaces = new StringBuilder();
         for (int n = 0; n < path.length(); n++) {
@@ -206,7 +195,6 @@ public class CommentedConfiguration extends YamlConfiguration {
         comments.put(path, commentstring.toString());
     }
 
-
     public void save(File file) throws IOException {
         Validate.notNull(file, "File cannot be null");
 
@@ -226,9 +214,7 @@ public class CommentedConfiguration extends YamlConfiguration {
         yamlOptions.setWidth(10000);
         yamlRepresenter.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
 
-
         String dump = yaml.dump(getValues(false));
-
 
         if (dump.equals(BLANK_CONFIG)) {
             dump = "";

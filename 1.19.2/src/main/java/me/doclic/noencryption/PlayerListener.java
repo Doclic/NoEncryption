@@ -11,30 +11,22 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin (PlayerJoinEvent e) {
-
         final Player player = e.getPlayer();
         final ChannelPipeline pipeline = Compatibility.COMPATIBLE_PLAYER.getChannel(player).pipeline();
         final ChannelDuplexHandler handler = new ChannelDuplexHandler() {
-
             @Override
             public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
-
                 Object newPacket = Compatibility.COMPATIBLE_PACKET_LISTENER.readPacket(channelHandlerContext, packet);
                 super.channelRead(channelHandlerContext, newPacket);
-
             }
 
             @Override
             public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
-
                 Object newPacket = Compatibility.COMPATIBLE_PACKET_LISTENER.writePacket(channelHandlerContext, packet, promise);
                 super.write(channelHandlerContext, newPacket, promise);
-
             }
-
         };
 
         if (pipeline.get("packet_handler") == null) {
@@ -48,16 +40,12 @@ public class PlayerListener implements Listener {
                 Chat.sendChat(player, ConfigurationHandler.getLoginProtectionMessage());
             }
         }
-
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit (PlayerQuitEvent e) {
-
         final Player player = e.getPlayer();
         final Channel channel = Compatibility.COMPATIBLE_PLAYER.getChannel(player);
         channel.eventLoop().submit(() -> channel.pipeline().remove(player.getUniqueId().toString()));
-
     }
-
 }

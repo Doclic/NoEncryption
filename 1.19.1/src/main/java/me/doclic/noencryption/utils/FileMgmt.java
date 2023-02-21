@@ -13,9 +13,9 @@ public class FileMgmt {
     }
 
     public static void checkFolders(String[] folders) {
-
         for (String folder : folders) {
             File f = new File(folder);
+
             if (!(f.exists() && f.isDirectory())) {
                 f.getParentFile().mkdirs();
                 f.mkdir();
@@ -25,17 +25,14 @@ public class FileMgmt {
     }
 
     public static String fileSeparator() {
-
         return System.getProperty("file.separator");
     }
 
     public static boolean CheckYMLExists(File file) {
-
         return file.exists();
     }
 
     public static File createNewFile(File file) {
-
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -43,6 +40,7 @@ public class FileMgmt {
                 e.printStackTrace();
             }
         }
+
         return file;
     }
 
@@ -53,7 +51,6 @@ public class FileMgmt {
      * @return Contents of file. String will be empty in case of any errors.
      */
     public static String convertFileToString(File file) {
-
         if (file != null && file.exists() && file.canRead() && !file.isDirectory()) {
             Writer writer = new StringWriter();
 
@@ -83,14 +80,11 @@ public class FileMgmt {
      * @throws IOException
      */
     public static void stringToFile(String source, File file) {
-
         try {
-
             OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
 
             out.write(source);
             out.close();
-
         } catch (IOException e) {
             main.getLogger().log(Level.SEVERE, "Exception: " + e.getMessage());
         }

@@ -46,7 +46,6 @@ public class ConfigurationHandler {
         }
 
         setDefaults(file);
-
         config.save();
 
         return true;
@@ -56,7 +55,6 @@ public class ConfigurationHandler {
      * Builds a new config reading old config data.
      */
     private static void setDefaults(File file) {
-
         newConfig = new CommentedConfiguration(file);
         newConfig.load();
 
@@ -85,8 +83,8 @@ public class ConfigurationHandler {
      * Prints any new config options to the config
      */
     public static void printChanges() {
-
         main.getLogger().log(Level.INFO, "Checking for new config option...");
+
         if (!newOptions.isEmpty()) {
 
             newOptions.forEach((root, def) -> main.getLogger().log(Level.INFO, "  " + root + ": " + def));
@@ -95,6 +93,7 @@ public class ConfigurationHandler {
         }
 
         main.getLogger().log(Level.INFO, "Checking for important messages...");
+
         if (!messages.isEmpty()) {
 
             messages.forEach((root, msg) -> main.getLogger().log(Level.WARNING, "  " + root + ": \"" + msg + "\""));
@@ -104,24 +103,21 @@ public class ConfigurationHandler {
     }
 
     private static void addComment(String root, String... comments) {
-
         newConfig.addComment(root.toLowerCase(), comments);
     }
 
     private static void setProperty(String root, Object value) {
-
         config.set(root.toLowerCase(), value.toString());
     }
 
     private static void setNewProperty(String root, Object value) {
-
         if (value == null) {
             // System.out.print("value is null for " + root.toLowerCase());
             value = "";
         }
+
         newConfig.set(root.toLowerCase(), value.toString());
     }
-
 
     /**
      * Get's a value for a ConfigNode
@@ -130,9 +126,7 @@ public class ConfigurationHandler {
      * @return - Value for node
      */
     private static String getString(ConfigNodes node) {
-
         return config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
-
     }
 
     /**
@@ -142,7 +136,6 @@ public class ConfigurationHandler {
      * @return - Value for node (specifically boolean)
      */
     private static boolean getBoolean(ConfigNodes node) {
-
         return config.getBoolean(node.getRoot().toLowerCase(), Boolean.parseBoolean(String.valueOf(node.getDefault())));
     }
 
@@ -153,7 +146,6 @@ public class ConfigurationHandler {
      * @return - Value for node (specifically double)
      */
     private static double getDouble(ConfigNodes node) {
-
         try {
             return config.getDouble(node.getRoot().toLowerCase(), Double.parseDouble(String.valueOf(node.getDefault())));
         } catch (NumberFormatException e) {
@@ -169,7 +161,6 @@ public class ConfigurationHandler {
      * @return - Value for node (specifically int)
      */
     private static int getInt(ConfigNodes node) {
-
         try {
             return config.getInt(node.getRoot().toLowerCase(), Integer.parseInt(String.valueOf(node.getDefault())));
         } catch (NumberFormatException e) {

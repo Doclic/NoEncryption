@@ -11,7 +11,6 @@ import net.minecraft.util.Crypt.SaltSignaturePair;
 import java.util.Optional;
 
 public class CompatiblePacketListener {
-
     public Object readPacket(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception { return packet; }
 
     public Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
@@ -31,7 +30,5 @@ public class CompatiblePacketListener {
             }
 
         return packet;
-
     }
-
 }
