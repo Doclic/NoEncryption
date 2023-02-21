@@ -17,7 +17,7 @@ public class PlayerListener implements Listener {
 
         final Player player = e.getPlayer();
         final ChannelPipeline pipeline = Compatibility.COMPATIBLE_PLAYER.getChannel(player).pipeline();
-        pipeline.addBefore("packet_handler", player.getUniqueId().toString(), new ChannelDuplexHandler() {
+        final ChannelDuplexHandler handler = new ChannelDuplexHandler() {
 
             @Override
             public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
@@ -35,7 +35,13 @@ public class PlayerListener implements Listener {
 
             }
 
-        });
+        };
+
+        if (pipeline.get("packet_handler") == null) {
+            pipeline.addLast(player.getUniqueId().toString(), handler);
+        } else {
+            pipeline.addBefore("packet_handler", player.getUniqueId().toString(), handler);
+        }
 
         if (ConfigurationHandler.getLoginProtectionMessage() != null) {
             if (!ConfigurationHandler.getLoginProtectionMessage().trim().equals("")) {
