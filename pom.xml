@@ -6,7 +6,7 @@
 
     <groupId>me.doclic</groupId>
     <artifactId>NoEncryption</artifactId>
-    <version>4.0</version>
+    <version>4.1</version>
     <packaging>pom</packaging>
 
     <name>NoEncryption</name>
