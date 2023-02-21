@@ -5,3 +5,4 @@ main: me.doclic.noencryption.NoEncryption
 api-version: 1.19
 authors: [ Doclic, V1nc3ntWasTaken ]
 description: Strips signatures from player messages
+website: https://github.com/Doclic/NoEncryption
