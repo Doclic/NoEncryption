@@ -6,6 +6,7 @@ import me.doclic.noencryption.config.ConfigurationHandler;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatHeaderPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
+import net.minecraft.network.protocol.game.ClientboundServerDataPacket;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
 
@@ -60,6 +61,16 @@ public class CompatiblePacketListener {
                     new MessageSignature(new byte[0]),
                     clientboundPlayerChatHeaderPacket.bodyDigest()
             );
+        } else if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
+            if (ConfigurationHandler.getDisableBanner()) {
+                // recreate a new packet
+                return new ClientboundServerDataPacket(
+                        clientboundServerDataPacket.getMotd().get(),
+                        clientboundServerDataPacket.getIconBase64().orElse(""),
+                        clientboundServerDataPacket.previewsChat(),
+                        true
+                );
+            }
         }
 
         return packet;

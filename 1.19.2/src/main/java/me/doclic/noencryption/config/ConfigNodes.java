@@ -56,7 +56,14 @@ public enum ConfigNodes {
             "# Note: Enabling this option may cause chat messages to not be fully stripped, thus showing the red bar, and red exclamation mark",
             "# ",
             "# Added in v3.1",
-            "# Default: false");
+            "# Default: false"),
+
+    DISABLE_BANNER(null, "disable_banner", true,
+            " ",
+            "# Disabled the modified chats banner on the top right of the client",
+            "# ",
+            "# Added in v3.2",
+            "# Default: true");
 
 
     private final String Notice;

@@ -185,4 +185,8 @@ public class ConfigurationHandler {
     public static boolean getForwardUUID() {
         return getBoolean(ConfigNodes.FORWARD_UUID);
     }
+
+    public static boolean getDisableBanner() {
+        return getBoolean(ConfigNodes.DISABLE_BANNER);
+    }
 }
