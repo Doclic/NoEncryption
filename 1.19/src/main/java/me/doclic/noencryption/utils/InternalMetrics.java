@@ -12,6 +12,8 @@ public class InternalMetrics {
 
         int pluginId = 17791;
         InternalMetrics.metrics = new Metrics(NoEncryption.plugin(), pluginId);
+
+        NoEncryption.logger().info("bStats is enabled for NoEncryption by default. To disable this, or to see more info, check the NoEncryption config");
     }
 
     public static void insertChart(Metrics.CustomChart chart) {
