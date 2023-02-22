@@ -136,7 +136,8 @@ public class ConfigurationHandler {
      * @return - Value for node (specifically boolean)
      */
     private static boolean getBoolean(ConfigNodes node) {
-        return config.getBoolean(node.getRoot().toLowerCase(), Boolean.parseBoolean(String.valueOf(node.getDefault())));
+        String boolString = config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
+        return Boolean.parseBoolean(boolString);
     }
 
     /**
