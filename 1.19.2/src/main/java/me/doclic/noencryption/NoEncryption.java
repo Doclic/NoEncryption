@@ -18,7 +18,6 @@ public final class NoEncryption extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         logger = getLogger();
-        InternalMetrics.loadMetrics();
 
         if (Compatibility.SERVER_COMPATIBLE) {
             FileMgmt.initialize(this);
@@ -55,12 +54,10 @@ public final class NoEncryption extends JavaPlugin {
                 logger().info("This message can be safely ignored.");
             }
 
-            InternalMetrics.insertChart(new Metrics.SimplePie("enabledDisabled", () -> "Enabled"));
+            InternalMetrics.loadMetrics();
         } else {
             logger().severe("Failed to setup NoEncryption's compatibility!");
             logger().severe("Your server version (" + Compatibility.SERVER_VERSION + ") is not compatible with this JAR! Check here for the latest version: https://github.com/Doclic/NoEncryption/releases/latest");
-
-            InternalMetrics.insertChart(new Metrics.SimplePie("enabledDisabled", () -> "Disabled"));
 
             Bukkit.getPluginManager().disablePlugin(this);
         }

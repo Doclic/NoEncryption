@@ -22,10 +22,6 @@ public class InternalMetrics {
     }
 
     private static boolean enabled() {
-        try {
-            return ConfigurationHandler.bStatsEnabled();
-        } catch (NullPointerException e) {
-            return true;
-        }
+        return ConfigurationHandler.bStatsEnabled();
     }
 }
