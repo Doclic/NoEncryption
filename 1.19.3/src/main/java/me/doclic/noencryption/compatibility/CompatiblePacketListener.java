@@ -7,6 +7,7 @@ import me.doclic.noencryption.utils.InternalMetrics;
 import me.doclic.noencryption.utils.Metrics;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
 import net.minecraft.network.protocol.game.ClientboundServerDataPacket;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
@@ -21,14 +22,13 @@ public class CompatiblePacketListener {
 
     public Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
         if (packet instanceof final ClientboundPlayerChatPacket clientboundPlayerChatPacket) {
-            final String plainText = clientboundPlayerChatPacket.body().content();
-            final Component textComponent = Component.literal(plainText);
-            Optional<ChatType.Bound> chatType = clientboundPlayerChatPacket.chatType().resolve(((CraftServer) Bukkit.getServer()).getServer().registryAccess());
+            final MutableComponent unsigned = clientboundPlayerChatPacket.unsignedContent().copy();
+            final Optional<ChatType.Bound> chatType = clientboundPlayerChatPacket.chatType().resolve(((CraftServer) Bukkit.getServer()).getServer().registryAccess());
 
             InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
 
             return new ClientboundSystemChatPacket(
-                    chatType.orElseThrow().decorate(textComponent),
+                    chatType.orElseThrow().decorate(unsigned),
                     false
             );
         }
