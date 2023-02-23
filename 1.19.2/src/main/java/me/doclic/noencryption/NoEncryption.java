@@ -42,7 +42,6 @@ public final class NoEncryption extends JavaPlugin {
                 logger().info("Currently, there are no known issues relating to NoEncryption and Essentials.");
                 logger().info("If you encounter any issues, please create an issue on the NoEncryption GitHub at");
                 logger().info("https://github.com/Doclic/NoEncryption/issues");
-                logger().info("This message can be safely ignored.");
             }
 
             if (Bukkit.getPluginManager().getPlugin("ViaVersion") != null) {
@@ -51,7 +50,6 @@ public final class NoEncryption extends JavaPlugin {
                 logger().info("Currently, there are no known issues relating to NoEncryption and ViaVersion.");
                 logger().info("If you encounter any issues, please create an issue on the NoEncryption GitHub at");
                 logger().info("https://github.com/Doclic/NoEncryption/issues");
-                logger().info("This message can be safely ignored.");
             }
 
             InternalMetrics.loadMetrics();
