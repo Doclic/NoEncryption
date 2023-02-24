@@ -7,7 +7,6 @@ import me.doclic.noencryption.utils.InternalMetrics;
 import me.doclic.noencryption.utils.Metrics;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
 import net.minecraft.network.protocol.game.ClientboundServerDataPacket;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
@@ -20,38 +19,42 @@ import java.util.Optional;
 public class CompatiblePacketListener {
     public Object readPacket(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception { return packet; }
 
-    public Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise) throws Exception {
-        if (packet instanceof final ClientboundPlayerChatPacket clientboundPlayerChatPacket) {
-            final MutableComponent unsigned = clientboundPlayerChatPacket.unsignedContent().copy();
-            final Optional<ChatType.Bound> chatType = clientboundPlayerChatPacket.chatType().resolve(((CraftServer) Bukkit.getServer()).getServer().registryAccess());
+    public Object writePacket(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise promise, boolean playerPipe) throws Exception {
+        if (playerPipe) {
+            if (packet instanceof final ClientboundPlayerChatPacket clientboundPlayerChatPacket) {
+                final Component chatMessage = Optional.ofNullable(clientboundPlayerChatPacket.unsignedContent()).orElse(Component.literal(clientboundPlayerChatPacket.body().content()));
+                final Optional<ChatType.Bound> chatType = clientboundPlayerChatPacket.chatType().resolve(((CraftServer) Bukkit.getServer()).getServer().registryAccess());
 
-            InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
+                InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
 
-            return new ClientboundSystemChatPacket(
-                    chatType.orElseThrow().decorate(unsigned),
-                    false
-            );
-        }
-
-        if (packet instanceof final ClientboundSystemChatPacket clientboundSystemChatPacket) {
-            if (clientboundSystemChatPacket.content() == null) {
-                return clientboundSystemChatPacket;
-            } else {
-                // recreate a new packet
                 return new ClientboundSystemChatPacket(
-                        CraftChatMessage.fromJSONOrNull(clientboundSystemChatPacket.content()),
-                        clientboundSystemChatPacket.overlay());
-            }
-        }
-
-        if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
-            if (ConfigurationHandler.getDisableBanner()) {
-                // recreate a new packet
-                return new ClientboundServerDataPacket(
-                        clientboundServerDataPacket.getMotd().get(),
-                        clientboundServerDataPacket.getIconBase64().orElse(""),
-                        true
+                        chatType.orElseThrow().decorate(chatMessage),
+                        false
                 );
+            }
+
+            if (packet instanceof final ClientboundSystemChatPacket clientboundSystemChatPacket) {
+                if (clientboundSystemChatPacket.content() == null) {
+                    return clientboundSystemChatPacket;
+                } else {
+                    // recreate a new packet
+                    return new ClientboundSystemChatPacket(
+                            CraftChatMessage.fromJSONOrNull(clientboundSystemChatPacket.content()),
+                            clientboundSystemChatPacket.overlay());
+                }
+            }
+        } else {
+            if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
+                InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
+
+                if (ConfigurationHandler.getDisableBanner()) {
+                    // recreate a new packet
+                    return new ClientboundServerDataPacket(
+                            clientboundServerDataPacket.getMotd().get(),
+                            clientboundServerDataPacket.getIconBase64().orElse(""),
+                            true
+                    );
+                }
             }
         }
 
