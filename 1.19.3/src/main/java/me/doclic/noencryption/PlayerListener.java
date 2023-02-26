@@ -19,7 +19,7 @@ public class PlayerListener implements Listener {
                 Channel channel = connection.channel;
                 ChannelPipeline pipeline = channel.pipeline();
 
-                if (pipeline.get("noencryption") == null) {
+                if (pipeline.get("noencryption_serverlevel") == null) {
                     final ChannelDuplexHandler handler = new ChannelDuplexHandler() {
                         @Override
                         public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
@@ -43,9 +43,9 @@ public class PlayerListener implements Listener {
                     };
 
                     if (pipeline.get("packet_handler") == null) {
-                        pipeline.addLast("noencryption", handler);
+                        pipeline.addLast("noencryption_serverlevel", handler);
                     } else {
-                        pipeline.addBefore("packet_handler", "noencryption", handler);
+                        pipeline.addBefore("packet_handler", "noencryption_serverlevel", handler);
                     }
                 }
             });
@@ -54,7 +54,7 @@ public class PlayerListener implements Listener {
         NoEncryption.testerTask = Bukkit.getScheduler().runTaskTimerAsynchronously(NoEncryption.plugin(), () -> {
             NoEncryption.serverChannels.forEach((uuid, channel) -> {
                 if (Bukkit.getPlayer(uuid) == null) {
-                    channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption"));
+                    channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption_serverlevel"));
                     NoEncryption.serverChannels.remove(uuid);
                 }
             });
@@ -85,9 +85,9 @@ public class PlayerListener implements Listener {
         };
 
         if (pipeline.get("packet_handler") == null) {
-            pipeline.addLast(player.getUniqueId().toString(), handler);
+            pipeline.addLast("noencryption_playerlevel", handler);
         } else {
-            pipeline.addBefore("packet_handler", player.getUniqueId().toString(), handler);
+            pipeline.addBefore("packet_handler", "noencryption_playerlevel", handler);
         }
 
         if (ConfigurationHandler.getLoginProtectionMessage() != null) {
@@ -101,10 +101,10 @@ public class PlayerListener implements Listener {
     public void onPlayerQuit (PlayerQuitEvent e) {
         final Player player = e.getPlayer();
         final Channel channel = Compatibility.COMPATIBLE_PLAYER.getChannel(player);
-        channel.eventLoop().submit(() -> channel.pipeline().remove(player.getUniqueId().toString()));
+        channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption_playerlevel"));
 
         Channel serverChannel = NoEncryption.serverChannels.get(player.getUniqueId());
-        serverChannel.eventLoop().submit(() -> serverChannel.pipeline().remove("noencryption"));
+        serverChannel.eventLoop().submit(() -> serverChannel.pipeline().remove("noencryption_serverlevel"));
         NoEncryption.serverChannels.remove(player.getUniqueId());
     }
 }

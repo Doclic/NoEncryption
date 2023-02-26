@@ -30,9 +30,9 @@ public class PlayerListener implements Listener {
         };
 
         if (pipeline.get("packet_handler") == null) {
-            pipeline.addLast(player.getUniqueId().toString(), handler);
+            pipeline.addLast("noencryption_playerlevel", handler);
         } else {
-            pipeline.addBefore("packet_handler", player.getUniqueId().toString(), handler);
+            pipeline.addBefore("packet_handler", "noencryption_playerlevel", handler);
         }
 
         if (ConfigurationHandler.getLoginProtectionMessage() != null) {
@@ -46,6 +46,6 @@ public class PlayerListener implements Listener {
     public void onPlayerQuit (PlayerQuitEvent e) {
         final Player player = e.getPlayer();
         final Channel channel = Compatibility.COMPATIBLE_PLAYER.getChannel(player);
-        channel.eventLoop().submit(() -> channel.pipeline().remove(player.getUniqueId().toString()));
+        channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption_playerlevel"));
     }
 }
