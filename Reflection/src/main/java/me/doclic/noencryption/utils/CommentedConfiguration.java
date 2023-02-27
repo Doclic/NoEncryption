@@ -2,7 +2,6 @@ package me.doclic.noencryption.utils;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import org.apache.commons.lang3.Validate;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.file.YamlConstructor;
@@ -13,6 +12,7 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * @author dumptruckman, LlmDL & Articdive
@@ -195,8 +195,8 @@ public class CommentedConfiguration extends YamlConfiguration {
         comments.put(path, commentstring.toString());
     }
 
-    public void save(File file) throws IOException {
-        Validate.notNull(file, "File cannot be null");
+    public void save(File file) throws IOException, NullPointerException {
+        Objects.requireNonNull(file, "File cannot be null");
 
         Files.createParentDirs(file);
 
