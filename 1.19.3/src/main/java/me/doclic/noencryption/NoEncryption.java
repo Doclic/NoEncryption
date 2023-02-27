@@ -1,18 +1,24 @@
 package me.doclic.noencryption;
 
+import io.netty.channel.Channel;
 import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import me.doclic.noencryption.utils.FileMgmt;
 import me.doclic.noencryption.utils.InternalMetrics;
-import me.doclic.noencryption.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
+import java.util.HashMap;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 public final class NoEncryption extends JavaPlugin {
     private static NoEncryption plugin;
     private static Logger logger;
+    public static HashMap<UUID, Channel> serverChannels;
+    public static BukkitTask timerTask;
+    public static BukkitTask testerTask;
 
     @Override
     public void onEnable() {
@@ -31,6 +37,8 @@ public final class NoEncryption extends JavaPlugin {
 
             ConfigurationHandler.printChanges();
 
+            serverChannels = new HashMap<>();
+            PlayerListener.startConnectionListenTimer();
             Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
             logger().info("Compatibility successful!");
@@ -59,7 +67,11 @@ public final class NoEncryption extends JavaPlugin {
 
             Bukkit.getPluginManager().disablePlugin(this);
         }
+    }
 
+    @Override
+    public void onDisable() {
+        PlayerListener.stopConnectionListenTimer();
     }
 
     public static NoEncryption plugin() {
