@@ -153,9 +153,9 @@ public class VersionHandler11901 implements VersionHandler {
         }
 
         if (packet.getClass().equals(SERVER_DATA_PACKET_CLASS)) {
-            InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
-
             if (ConfigurationHandler.getDisableBanner()) {
+                InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
+
                 // recreate a new packet
                 return SERVER_DATA_PACKET_CONSTRUCTOR.newInstance(
                         ((Optional<?>) SERVER_DATA_MOTD_FIELD.get(packet)).get(),
