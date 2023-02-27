@@ -3,9 +3,11 @@ package me.doclic.noencryption.compatibility;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
+import me.doclic.noencryption.Chat;
 import me.doclic.noencryption.NoEncryption;
-import org.bukkit.ChatColor;
+import me.doclic.noencryption.config.ConfigurationHandler;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerKickEvent;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -66,9 +68,12 @@ public interface VersionHandler {
             NoEncryption.logger().severe("and the stacktrace shown below");
             e.printStackTrace();
 
-            // The Spigot method is deprecated in Paper, but it still works, todo change method depending on server impl, and allow admins to edit this msg
-            player.kickPlayer(ChatColor.RED + "You were kicked by NoEncryption due to an error\n" +
-                    ChatColor.RED + "Please contact the server admin");
+            try {
+                player.kick((net.kyori.adventure.text.Component) Chat.compileComponent(ConfigurationHandler.getSafetyKickMessage()), PlayerKickEvent.Cause.PLUGIN);
+            } catch (NoClassDefFoundError exception) {
+                // Server doesn't support Kyori chat so kick them through the Spigot method instead
+                player.kickPlayer((String) Chat.compileComponent(ConfigurationHandler.getSafetyKickMessage()));
+            }
         }
     }
 

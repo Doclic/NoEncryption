@@ -178,6 +178,10 @@ public class ConfigurationHandler {
         return getBoolean(ConfigNodes.DISABLE_BANNER);
     }
 
+    public static String getSafetyKickMessage() {
+        return getString(ConfigNodes.SAFETY_KICK_MESSAGE);
+    }
+
     public static boolean bStatsEnabled() {
         return getBoolean(ConfigNodes.BSTATS_ENABLED);
     }
