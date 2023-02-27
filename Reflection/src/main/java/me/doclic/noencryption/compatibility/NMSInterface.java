@@ -32,7 +32,7 @@ public class NMSInterface {
             return field;
         } catch (NoSuchFieldException e) {
             NoEncryption.logger().severe("Couldn't find field " + clazz.getName() + "#" + name);
-            NoEncryption.logger().severe("Please create an issue on at");
+            NoEncryption.logger().severe("Please create an issue at");
             NoEncryption.logger().severe("https://github.com/Doclic/NoEncryption/issues");
 
             throw new RuntimeException(e);
@@ -48,7 +48,7 @@ public class NMSInterface {
             return method;
         } catch (NoSuchMethodException e) {
             NoEncryption.logger().severe("Couldn't find method " + clazz.getName() + "#" + name);
-            NoEncryption.logger().severe("Please create an issue on at");
+            NoEncryption.logger().severe("Please create an issue at");
             NoEncryption.logger().severe("https://github.com/Doclic/NoEncryption/issues");
 
             throw new RuntimeException(e);
@@ -64,7 +64,7 @@ public class NMSInterface {
             return constructor;
         } catch (NoSuchMethodException e) {
             NoEncryption.logger().severe("Couldn't find constructor for " + clazz.getName());
-            NoEncryption.logger().severe("Please create an issue on at");
+            NoEncryption.logger().severe("Please create an issue at");
             NoEncryption.logger().severe("https://github.com/Doclic/NoEncryption/issues");
 
             throw new RuntimeException(e);
@@ -76,7 +76,7 @@ public class NMSInterface {
             return Class.forName(name);
         } catch (ClassNotFoundException e) {
             NoEncryption.logger().severe("Couldn't find class " + name);
-            NoEncryption.logger().severe("Please create an issue on at");
+            NoEncryption.logger().severe("Please create an issue at");
             NoEncryption.logger().severe("https://github.com/Doclic/NoEncryption/issues");
 
             throw new RuntimeException(e);
