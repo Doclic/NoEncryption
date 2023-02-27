@@ -64,10 +64,6 @@
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
-<!--        <repository>-->
-<!--            <id>spigot-repo</id>-->
-<!--            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>-->
-<!--        </repository>-->
     </repositories>
 
     <dependencies>
