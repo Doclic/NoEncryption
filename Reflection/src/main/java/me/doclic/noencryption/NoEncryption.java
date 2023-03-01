@@ -4,7 +4,6 @@ import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import me.doclic.noencryption.utils.FileMgmt;
 import me.doclic.noencryption.utils.InternalMetrics;
-import me.doclic.noencryption.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
