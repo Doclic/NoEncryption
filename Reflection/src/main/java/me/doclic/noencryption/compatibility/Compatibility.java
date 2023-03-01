@@ -1,6 +1,7 @@
 package me.doclic.noencryption.compatibility;
 
 import me.doclic.noencryption.NoEncryption;
+import me.doclic.noencryption.compatibility.versionhandler.*;
 import org.bukkit.Bukkit;
 
 public class Compatibility {

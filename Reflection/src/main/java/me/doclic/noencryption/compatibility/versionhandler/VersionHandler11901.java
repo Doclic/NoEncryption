@@ -1,6 +1,7 @@
-package me.doclic.noencryption.compatibility;
+package me.doclic.noencryption.compatibility.versionhandler;
 
-import com.google.gson.JsonParseException;
+//import com.google.gson.JsonParseException;
+import me.doclic.noencryption.compatibility.NMSInterface;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import me.doclic.noencryption.utils.InternalMetrics;
 import me.doclic.noencryption.utils.Metrics;

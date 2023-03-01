@@ -1,5 +1,6 @@
-package me.doclic.noencryption.compatibility;
+package me.doclic.noencryption.compatibility.versionhandler;
 
+import me.doclic.noencryption.compatibility.NMSInterface;
 import me.doclic.noencryption.utils.InternalMetrics;
 import me.doclic.noencryption.utils.Metrics;
 

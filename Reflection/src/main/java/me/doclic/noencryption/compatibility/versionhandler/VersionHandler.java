@@ -1,10 +1,11 @@
-package me.doclic.noencryption.compatibility;
+package me.doclic.noencryption.compatibility.versionhandler;
 
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.doclic.noencryption.Chat;
 import me.doclic.noencryption.NoEncryption;
+import me.doclic.noencryption.compatibility.NMSInterface;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerKickEvent;
