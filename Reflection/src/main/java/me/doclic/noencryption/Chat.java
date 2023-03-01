@@ -1,13 +1,12 @@
 package me.doclic.noencryption;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
 public class Chat {
     public static void sendChat(Player player, String message) {
         if (NoEncryption.usesKyoriChat()) {
             player.sendMessage(
-                    (Component) compileComponent(message)
+                    (net.kyori.adventure.text.Component) compileComponent(message)
             );
         } else {
             player.sendMessage(
