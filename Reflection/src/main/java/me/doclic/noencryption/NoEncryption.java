@@ -76,6 +76,8 @@ public final class NoEncryption extends JavaPlugin {
     public static boolean usesKyoriChat() {
         try {
             Class.forName("net.kyori.adventure.Adventure");
+            Class.forName("net.kyori.adventure.text.Component");
+            Class.forName("net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer");
 
             return true;
         } catch (ClassNotFoundException e) {
