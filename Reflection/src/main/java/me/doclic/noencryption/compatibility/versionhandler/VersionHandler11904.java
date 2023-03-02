@@ -67,9 +67,7 @@ public class VersionHandler11904 implements VersionHandler {
             if(content != null) content = COMPONENT_COPY_METHOD.invoke(content);
             final var nmsServer = NMSInterface.getNMSServer();
 
-            //todo double check "aW"
             if(serverRegistryAccessMethod == null) serverRegistryAccessMethod = NMSInterface.getMethod(nmsServer.getClass()/*.getSuperclass()*/, "aW");
-            //todo double check "a"
             if(chatTypeResolveMethod == null) chatTypeResolveMethod = NMSInterface.getMethod(PLAYER_CHAT_TYPE_FIELD.getType(), "a", NMSInterface.getClass("net.minecraft.core.IRegistryCustom"));
             final var chatType =
                     ((Optional<?>) chatTypeResolveMethod.invoke(PLAYER_CHAT_TYPE_FIELD.get(packet), serverRegistryAccessMethod.invoke(nmsServer))).orElseThrow();
