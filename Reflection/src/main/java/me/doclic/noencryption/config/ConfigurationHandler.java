@@ -141,6 +141,10 @@ public class ConfigurationHandler {
             return getString(ConfigNodes.SAFETY_KICK_MESSAGE);
         }
 
+        public static boolean doAutoUpdateCheck() {
+            return getBoolean(ConfigNodes.AUTO_UPDATE_CHECK);
+        }
+
         public static boolean bStatsEnabled() {
             return getBoolean(ConfigNodes.BSTATS_ENABLED);
         }
