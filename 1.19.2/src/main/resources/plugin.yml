@@ -27,6 +27,10 @@ permissions:
     default: op
     children:
       - noencryption.command.suppressnotices
+      - noencryption.command.checkforupdates
 
   noencryption.command.suppressnotices:
+    default: op
+
+  noencryption.command.checkforupdates:
     default: op
