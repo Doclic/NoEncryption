@@ -5,6 +5,7 @@ import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import me.doclic.noencryption.utils.FileMgmt;
 import me.doclic.noencryption.utils.InternalMetrics;
+import me.doclic.noencryption.utils.updates.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,7 +36,24 @@ public final class NoEncryption extends JavaPlugin {
             getCommand("noencryption").setExecutor(new MainCommand());
             getCommand("noencryption").setTabCompleter(new MainCommand());
 
-            Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);if (ConfigurationHandler.Config.doAutoUpdateCheck())
+                UpdateChecker.check(
+                        () -> {
+                            logger().info("You are running an old version of NoEncryption.");
+                            logger().info("It is recommended to update to the latest version");
+                            logger().info("for the best experience. The update can be found here:");
+                            logger().info(UpdateChecker.updateUrl.toString());
+                        },
+                        () -> {
+                            logger().info("Your NoEncryption version is up-to-date");
+                        },
+                        () -> {
+                            logger().info("Could not check for the latest version of NoEncryption.");
+                            logger().info("It is recommended to update to the latest version");
+                            logger().info("for the best experience. The update can be found here:");
+                            logger().info(UpdateChecker.updateUrl.toString());
+                        }
+                );
 
             logger().info("Compatibility successful!");
             logger().info("If you used /reload to update NoEncryption, your players need to disconnect and join back");

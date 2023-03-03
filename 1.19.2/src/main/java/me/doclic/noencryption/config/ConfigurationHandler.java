@@ -141,6 +141,10 @@ public class ConfigurationHandler {
             return getBoolean(ConfigNodes.DISABLE_BANNER);
         }
 
+        public static boolean doAutoUpdateCheck() {
+            return getBoolean(ConfigNodes.AUTO_UPDATE_CHECK);
+        }
+
         public static boolean bStatsEnabled() {
             return getBoolean(ConfigNodes.BSTATS_ENABLED);
         }
