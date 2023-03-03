@@ -62,8 +62,11 @@ public class PlayerListener implements Listener {
     }
 
     public static void stopConnectionListenTimer() {
-        NoEncryption.timerTask.cancel();
-        NoEncryption.testerTask.cancel();
+        if (NoEncryption.timerTask != null)
+            NoEncryption.timerTask.cancel();
+
+        if (NoEncryption.testerTask != null)
+            NoEncryption.testerTask.cancel();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
