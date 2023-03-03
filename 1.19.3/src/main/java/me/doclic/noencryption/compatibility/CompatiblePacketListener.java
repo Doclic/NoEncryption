@@ -47,7 +47,7 @@ public class CompatiblePacketListener {
             if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
                 InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
 
-                if (ConfigurationHandler.getDisableBanner()) {
+                if (ConfigurationHandler.Config.getDisableBanner()) {
                     // recreate a new packet
                     return new ClientboundServerDataPacket(
                             clientboundServerDataPacket.getMotd().get(),

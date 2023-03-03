@@ -1,5 +1,6 @@
 package me.doclic.noencryption;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Chat {
@@ -13,6 +14,15 @@ public class Chat {
                     (String) compileComponent(message)
             );
         }
+    }
+
+    public static void sendChat(CommandSender sender, String message) {
+        if (sender instanceof Player)
+            sendChat((Player) sender, message);
+        else
+            sender.sendMessage(
+                    org.bukkit.ChatColor.translateAlternateColorCodes('&', message)
+            );
     }
 
     public static Object compileComponent(String message) {

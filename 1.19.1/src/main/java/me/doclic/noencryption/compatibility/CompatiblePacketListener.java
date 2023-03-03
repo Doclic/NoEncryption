@@ -33,7 +33,7 @@ public class CompatiblePacketListener {
                     new PlayerChatMessage(
                             new SignedMessageHeader(
                                     new MessageSignature(new byte[0]),
-                                    (ConfigurationHandler.getForwardUUID() ? clientboundPlayerChatPacket.message().signedHeader().sender() : new UUID(0, 0))),
+                                    (ConfigurationHandler.Config.getForwardUUID() ? clientboundPlayerChatPacket.message().signedHeader().sender() : new UUID(0, 0))),
                             new MessageSignature(new byte[0]),
                             new SignedMessageBody(
                                     new ChatMessageContent(
@@ -75,7 +75,7 @@ public class CompatiblePacketListener {
         if (packet instanceof final ClientboundServerDataPacket clientboundServerDataPacket) {
             InternalMetrics.insertChart(new Metrics.SingleLineChart("popupsBlocked", () -> 1));
 
-            if (ConfigurationHandler.getDisableBanner()) {
+            if (ConfigurationHandler.Config.getDisableBanner()) {
                 // recreate a new packet
                 return new ClientboundServerDataPacket(
                         clientboundServerDataPacket.getMotd().get(),

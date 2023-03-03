@@ -90,9 +90,9 @@ public class PlayerListener implements Listener {
             pipeline.addBefore("packet_handler", "noencryption_playerlevel", handler);
         }
 
-        if (ConfigurationHandler.getLoginProtectionMessage() != null) {
-            if (!ConfigurationHandler.getLoginProtectionMessage().trim().equals("")) {
-                Chat.sendChat(player, ConfigurationHandler.getLoginProtectionMessage());
+        if (ConfigurationHandler.Config.getLoginProtectionMessage() != null) {
+            if (!ConfigurationHandler.Config.getLoginProtectionMessage().trim().equals("")) {
+                Chat.sendChat(player, ConfigurationHandler.Config.getLoginProtectionMessage());
             }
         }
     }

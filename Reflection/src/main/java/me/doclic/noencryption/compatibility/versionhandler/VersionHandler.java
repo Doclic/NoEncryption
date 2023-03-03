@@ -70,10 +70,10 @@ public interface VersionHandler {
             e.printStackTrace();
 
             try {
-                player.kick((net.kyori.adventure.text.Component) Chat.compileComponent(ConfigurationHandler.getSafetyKickMessage()), PlayerKickEvent.Cause.PLUGIN);
+                player.kick((net.kyori.adventure.text.Component) Chat.compileComponent(ConfigurationHandler.Config.getSafetyKickMessage()), PlayerKickEvent.Cause.PLUGIN);
             } catch (NoClassDefFoundError exception) {
                 // Server doesn't support Kyori chat so kick them through the Spigot method instead
-                player.kickPlayer((String) Chat.compileComponent(ConfigurationHandler.getSafetyKickMessage()));
+                player.kickPlayer((String) Chat.compileComponent(ConfigurationHandler.Config.getSafetyKickMessage()));
             }
         }
     }

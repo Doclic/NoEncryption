@@ -10,179 +10,229 @@ import java.util.logging.Level;
 
 public class ConfigurationHandler {
     private static NoEncryption main;
-    private static CommentedConfiguration config, newConfig;
-    private static HashMap<String, Object> newOptions;
-    private static HashMap<String, String> messages;
-    private static boolean firstConfig;
 
     public static void initialize(NoEncryption main) {
         ConfigurationHandler.main = main;
-        newOptions = new HashMap<>();
-        messages = new HashMap<>();
+
+        Config.initialize();
+        Notices.initialize();
     }
 
     public static boolean loadSettings() {
         FileMgmt.checkFolders(new String[]{
                 main.getRootFolder(),
-                main.getRootFolder() + FileMgmt.fileSeparator() + "settings"});
+                main.getRootFolder() + FileMgmt.fileSeparator() + "settings",
+                main.getRootFolder() + FileMgmt.fileSeparator() + "storage"});
 
-        return ConfigurationHandler.loadConfig();
+        return Notices.loadNotices() && Config.loadConfig();
     }
 
-    private static boolean loadConfig() {
-        String filepath = main.getRootFolder() + FileMgmt.fileSeparator() + "settings" + FileMgmt.fileSeparator() + "config.yml";
-        firstConfig = !FileMgmt.CheckYMLExists(new File(filepath));
+    public static class Config {
+        private static CommentedConfiguration config, newConfig;
+        private static HashMap<String, Object> newOptions;
+        private static boolean firstConfig;
 
-        File file = new File(filepath);
-        if (firstConfig) {
-            FileMgmt.createNewFile(file);
+        private static void initialize() {
+            newOptions = new HashMap<>();
         }
 
-        // read the config.yml into memory
-        config = new CommentedConfiguration(file);
-        if (!config.load()) {
-            main.getLogger().log(Level.SEVERE, "Failed to load config.yml");
-            return false;
-        }
+        private static boolean loadConfig() {
+            String filepath = main.getRootFolder() + FileMgmt.fileSeparator() + "settings" + FileMgmt.fileSeparator() + "config.yml";
+            firstConfig = !FileMgmt.CheckYMLExists(new File(filepath));
 
-        setDefaults(file);
-        config.save();
-
-        return true;
-    }
-
-    /**
-     * Builds a new config reading old config data.
-     */
-    private static void setDefaults(File file) {
-        newConfig = new CommentedConfiguration(file);
-        newConfig.load();
-
-        for (ConfigNodes root : ConfigNodes.values()) {
-            if (root.getComments().length > 0) {
-                addComment(root.getRoot(), root.getComments());
+            File file = new File(filepath);
+            if (firstConfig) {
+                FileMgmt.createNewFile(file);
             }
 
-            setNewProperty(root.getRoot(), (config.get(root.getRoot().toLowerCase()) != null) ? config.get(root.getRoot().toLowerCase()) : root.getDefault());
-
-            if (!firstConfig && !config.getKeys(true).contains(root.getRoot()) && root.getDefaultOrNull() != null) {
-                newOptions.put(root.getRoot(), root.getDefault());
+            // read the config.yml into memory
+            config = new CommentedConfiguration(file);
+            if (!config.load()) {
+                NoEncryption.logger().log(Level.SEVERE, "Failed to load config.yml");
+                return false;
             }
 
-            if (root.getNotice() != null) {
-                messages.put(root.getRoot(), root.getNotice());
+            setDefaults(file);
+            config.save();
+
+            return true;
+        }
+
+        private static void setDefaults(File file) {
+            newConfig = new CommentedConfiguration(file);
+            newConfig.load();
+
+            for (ConfigNodes root : ConfigNodes.values()) {
+                if (root.getComments().length > 0) {
+                    addComment(root.getRoot(), root.getComments());
+                }
+
+                setNewProperty(root.getRoot(), (config.get(root.getRoot().toLowerCase()) != null) ? config.get(root.getRoot().toLowerCase()) : root.getDefault());
+
+                if (!firstConfig && !config.getKeys(true).contains(root.getRoot()) && root.getDefaultOrNull() != null) {
+                    newOptions.put(root.getRoot(), root.getDefault());
+                }
+
+                if (root.getNotice() != null) {
+                    Notices.messages.put(root.getRoot(), root.getNotice());
+                }
+
             }
 
+            config = newConfig;
+            newConfig = null;
         }
 
-        config = newConfig;
-        newConfig = null;
-    }
+        public static void printChanges() {
+            NoEncryption.logger().info("Checking for new config option...");
 
-    /**
-     * Prints any new config options to the config
-     */
-    public static void printChanges() {
-        main.getLogger().log(Level.INFO, "Checking for new config option...");
+            if (!newOptions.isEmpty()) {
 
-        if (!newOptions.isEmpty()) {
-
-            newOptions.forEach((root, def) -> main.getLogger().log(Level.INFO, "  " + root + ": " + def));
-        } else {
-            main.getLogger().log(Level.INFO, "No new config options detected");
+                newOptions.forEach((root, def) -> NoEncryption.logger().info("  " + root + ": " + def));
+            } else {
+                NoEncryption.logger().info("No new config options detected");
+            }
         }
 
-        main.getLogger().log(Level.INFO, "Checking for important messages...");
-
-        if (!messages.isEmpty()) {
-
-            messages.forEach((root, msg) -> main.getLogger().log(Level.WARNING, "  " + root + ": \"" + msg + "\""));
-        } else {
-            main.getLogger().log(Level.INFO, "No important messages detected");
-        }
-    }
-
-    private static void addComment(String root, String... comments) {
-        newConfig.addComment(root.toLowerCase(), comments);
-    }
-
-    private static void setProperty(String root, Object value) {
-        config.set(root.toLowerCase(), value.toString());
-    }
-
-    private static void setNewProperty(String root, Object value) {
-        if (value == null) {
-            // System.out.print("value is null for " + root.toLowerCase());
-            value = "";
+        private static void addComment(String root, String... comments) {
+            newConfig.addComment(root.toLowerCase(), comments);
         }
 
-        newConfig.set(root.toLowerCase(), value.toString());
-    }
+        private static void setProperty(String root, Object value) {
+            config.set(root.toLowerCase(), value.toString());
+        }
 
-    /**
-     * Get's a value for a ConfigNode
-     *
-     * @param node - ConfigNode
-     * @return - Value for node
-     */
-    private static String getString(ConfigNodes node) {
-        return config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
-    }
+        private static void setNewProperty(String root, Object value) {
+            if (value == null) {
+                value = "";
+            }
 
-    /**
-     * Get's a value for a ConfigNode
-     *
-     * @param node - ConfigNode
-     * @return - Value for node (specifically boolean)
-     */
-    private static boolean getBoolean(ConfigNodes node) {
-        String boolString = config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
-        return Boolean.parseBoolean(boolString);
-    }
+            newConfig.set(root.toLowerCase(), value.toString());
+        }
 
-    /**
-     * Get's a value for a ConfigNode
-     *
-     * @param node - ConfigNode
-     * @return - Value for node (specifically double)
-     */
-    private static double getDouble(ConfigNodes node) {
-        try {
-            return config.getDouble(node.getRoot().toLowerCase(), Double.parseDouble(String.valueOf(node.getDefault())));
-        } catch (NumberFormatException e) {
-            main.getLogger().log(Level.SEVERE, "Could not get/read double for value: " + node.getRoot().toLowerCase());
-            return 0.0;
+        private static String getString(ConfigNodes node) {
+            return config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
+        }
+
+        private static boolean getBoolean(ConfigNodes node) {
+            String boolString = config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
+            return Boolean.parseBoolean(boolString);
+        }
+
+        private static double getDouble(ConfigNodes node) {
+            String doubleString = config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
+            return Double.parseDouble(doubleString);
+        }
+
+        private static int getInt(ConfigNodes node) {
+            String intString = config.getString(node.getRoot().toLowerCase(), String.valueOf(node.getDefault()));
+            return Integer.parseInt(intString);
+        }
+
+        public static String getLoginProtectionMessage() {
+            return getString(ConfigNodes.LOGIN_PROTECTION_MESSAGE);
+        }
+
+        public static boolean getDisableBanner() {
+            return getBoolean(ConfigNodes.DISABLE_BANNER);
+        }
+
+        public static String getSafetyKickMessage() {
+            return getString(ConfigNodes.SAFETY_KICK_MESSAGE);
+        }
+
+        public static boolean bStatsEnabled() {
+            return getBoolean(ConfigNodes.BSTATS_ENABLED);
         }
     }
 
-    /**
-     * Get's a value for a ConfigNode
-     *
-     * @param node - ConfigNode
-     * @return - Value for node (specifically int)
-     */
-    private static int getInt(ConfigNodes node) {
-        try {
-            return config.getInt(node.getRoot().toLowerCase(), Integer.parseInt(String.valueOf(node.getDefault())));
-        } catch (NumberFormatException e) {
-            main.getLogger().log(Level.SEVERE, "Could not get/read int for value: " + node.getRoot().toLowerCase());
-            return 0;
+    public static class Notices {
+        private static File noticesFile;
+        private static CommentedConfiguration notices, newNotices;
+        private static HashMap<String, String> messages, activeMessages;
+
+        private static void initialize() {
+            messages = new HashMap<>();
+            activeMessages = new HashMap<>();
         }
-    }
 
-    public static String getLoginProtectionMessage() {
-        return getString(ConfigNodes.LOGIN_PROTECTION_MESSAGE);
-    }
+        private static boolean loadNotices() {
+            String filepath = main.getRootFolder() + FileMgmt.fileSeparator() + "storage" + FileMgmt.fileSeparator() + "notices.yml";
+            noticesFile = new File(filepath);
 
-    public static boolean getDisableBanner() {
-        return getBoolean(ConfigNodes.DISABLE_BANNER);
-    }
+            boolean firstNotices = !FileMgmt.CheckYMLExists(noticesFile);
 
-    public static String getSafetyKickMessage() {
-        return getString(ConfigNodes.SAFETY_KICK_MESSAGE);
-    }
+            if (firstNotices) {
+                FileMgmt.createNewFile(noticesFile);
+            }
 
-    public static boolean bStatsEnabled() {
-        return getBoolean(ConfigNodes.BSTATS_ENABLED);
+            // read the notices.yml into memory
+            notices = new CommentedConfiguration(noticesFile);
+            if (!notices.load()) {
+                NoEncryption.logger().log(Level.SEVERE, "Failed to load notices.yml");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static boolean suppressNotices() {
+            if (messages.isEmpty()) {
+                return false;
+            }
+
+            newNotices = new CommentedConfiguration(noticesFile);
+            newNotices.load();
+
+            if (activeMessages.isEmpty())
+                return false;
+
+            activeMessages.forEach(Notices::setNewProperty);
+            activeMessages = new HashMap<>();
+
+            notices = newNotices;
+            newNotices = null;
+
+            notices.save();
+            return true;
+        }
+
+        public static void loadAndPrintChanges() {
+            NoEncryption.logger().info("Checking for important messages...");
+
+            HashMap<String, String> display = new HashMap<>();
+
+            if (!messages.isEmpty()) {
+                messages.forEach((root, msg) -> {
+                    if (getString(root) == null || !getString(root).equals(msg))
+                        display.put(root, msg);
+                });
+
+                if (!display.isEmpty()) {
+                    display.forEach((root, msg) -> {
+                        NoEncryption.logger().warning("  " + root + ": \"" + msg + "\"");
+                        activeMessages.put(root, msg);
+                    });
+
+                    NoEncryption.logger().info("These messages can be suppressed with /ne suppressnotices");
+                } else {
+                    NoEncryption.logger().info("No important messages detected");
+                }
+            } else {
+                NoEncryption.logger().info("No important messages detected");
+            }
+        }
+
+        private static void setNewProperty(String root, Object value) {
+            if (value == null) {
+                value = "";
+            }
+
+            newNotices.set(root.toLowerCase(), value.toString());
+        }
+
+        private static String getString(String root) {
+            return notices.getString(root.toLowerCase(), null);
+        }
     }
 }

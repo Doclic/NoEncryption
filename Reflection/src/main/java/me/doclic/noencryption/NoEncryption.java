@@ -1,5 +1,6 @@
 package me.doclic.noencryption;
 
+import me.doclic.noencryption.commands.MainCommand;
 import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import me.doclic.noencryption.utils.FileMgmt;
@@ -28,7 +29,11 @@ public final class NoEncryption extends JavaPlugin {
                 return;
             }
 
-            ConfigurationHandler.printChanges();
+            ConfigurationHandler.Config.printChanges();
+            ConfigurationHandler.Notices.loadAndPrintChanges();
+
+            getCommand("noencryption").setExecutor(new MainCommand());
+            getCommand("noencryption").setTabCompleter(new MainCommand());
 
             Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
