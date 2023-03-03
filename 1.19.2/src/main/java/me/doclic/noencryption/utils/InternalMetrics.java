@@ -25,6 +25,6 @@ public class InternalMetrics {
     }
 
     private static boolean enabled() {
-        return ConfigurationHandler.bStatsEnabled();
+        return ConfigurationHandler.Config.bStatsEnabled();
     }
 }
