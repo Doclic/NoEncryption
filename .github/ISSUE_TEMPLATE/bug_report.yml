@@ -44,7 +44,8 @@ body:
     attributes:
       label: Server Type/Build
       description: What server type and version are you running? Use the contents of /version or /about
-      placeholder: ex. This server is running CraftBukkit version 3663-Bukkit-b56426c (MC: 1.19.3) (Implementing API version 1.19.3-R0.1-SNAPSHOT)
+      placeholder: |
+        ex. This server is running CraftBukkit version 3663-Bukkit-b56426c (MC: 1.19.3) (Implementing API version 1.19.3-R0.1-SNAPSHOT)
     validations:
       required: true
   - type: textarea
