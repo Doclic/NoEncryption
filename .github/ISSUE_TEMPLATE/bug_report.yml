@@ -14,7 +14,8 @@ body:
       description: Please make sure you're using the latest version of NoEncryption as it's possible your issue has already been fixed.
       options:
         - label: I am using the latest version of NoEncryption compatible with my server version.
-          required: true
+    validations:
+      required: true
   - type: checkboxes
     id: no-existing-issues
     attributes:
@@ -22,7 +23,8 @@ body:
       description: Please search to see if an issue already exists for the bug you encountered.
       options:
         - label: I have searched the existing issues and have not found a duplicate relating to my issue.
-          required: true
+    validations:
+      required: true
   - type: input
     id: ne-version
     attributes:
