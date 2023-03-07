@@ -1,5 +1,6 @@
 name: 🐞 Bug Report
 description: Report a bug for NoEncryption
+labels: bug
 body:
   - type: markdown
     attributes:
