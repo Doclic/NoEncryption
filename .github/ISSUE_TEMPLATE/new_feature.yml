@@ -15,8 +15,7 @@ body:
       description: Please search to see if an enhancement issue already exists for the new feature you are requesting.
       options:
         - label: I have searched the existing enhancement issues and have not found a duplicate relating to my request.
-    validations:
-      required: true
+          required: true
   - type: textarea
     id: purpose
     attributes:
@@ -38,8 +37,7 @@ body:
       description: Does this new feature affect any of NoEncryption's current functions?
       options:
         - label: I do not believe this feature would affect NoEncryption's existing functions.
-    validations:
-      required: true
+          required: true
   - type: textarea
     attributes:
       label: Anything else?
