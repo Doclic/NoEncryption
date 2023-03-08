@@ -8,6 +8,8 @@ body:
         ## NoEncryption Bug Report
         
         Before submitting a bug report issue, please make sure you are on the [latest release](https://github.com/Doclic/NoEncryption/releases) and have the proper JAR for the version you are running.
+        
+        ### Do not use this form to report a security issue. Refer to the links available in the Issues page.
   - type: checkboxes
     id: using-latest-ne
     attributes:
