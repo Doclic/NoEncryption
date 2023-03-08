@@ -40,7 +40,7 @@ Do the applied changes require testing? (Depends on if core components were chan
   <br>
   
   <b>1.19 Tests</b>
-  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur): 
+  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
   - [ ] Tested player joining
   - [ ] Tested chats **Player -> Server**
   - [ ] Tested command chats **Player -> Server** (Using /tell, /me, /say, etc.)
@@ -51,7 +51,7 @@ Do the applied changes require testing? (Depends on if core components were chan
   <br>
   
   <b>1.19.1 Tests</b>
-  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur): 
+  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
   - [ ] Tested player joining
   - [ ] Tested chats **Player -> Server**
   - [ ] Tested command chats **Player -> Server** (Using /tell, /me, /say, etc.)
@@ -62,7 +62,7 @@ Do the applied changes require testing? (Depends on if core components were chan
   <br>
   
   <b>1.19.2 Tests</b>
-  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur): 
+  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
   - [ ] Tested player joining
   - [ ] Tested chats **Player -> Server**
   - [ ] Tested command chats **Player -> Server** (Using /tell, /me, /say, etc.)
@@ -73,7 +73,7 @@ Do the applied changes require testing? (Depends on if core components were chan
   <br>
   
   <b>1.19.3 Tests</b>
-  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur): 
+  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
   - [ ] Tested player joining
   - [ ] Tested chats **Player -> Server**
   - [ ] Tested command chats **Player -> Server** (Using /tell, /me, /say, etc.)
@@ -84,7 +84,7 @@ Do the applied changes require testing? (Depends on if core components were chan
   <br>
   
   <b>1.19.4 Tests (Not Yet Available)</b>
-  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur): 
+  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
   - [ ] Tested player joining
   - [ ] Tested chats **Player -> Server**
   - [ ] Tested command chats **Player -> Server** (Using /tell, /me, /say, etc.)
