@@ -1,0 +1,150 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+
+version: 2
+registries:
+  papermc:
+    type: maven-repository
+    url: https://repo.papermc.io/repository/maven-public/
+  spigot-repo:
+    type: maven-repository
+    url: https://hub.spigotmc.org/nexus/content/repositories/snapshots/
+updates:
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
+      
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/1.19" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    registries:
+      - papermc
+      - spigot-repo
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "net.md-5:specialsource-maven-plugin"
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "io.papermc.paper:paper-api"
+      - dependency-name: "org.spigotmc:spigot"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
+      
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/1.19.1" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    registries:
+      - papermc
+      - spigot-repo
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "net.md-5:specialsource-maven-plugin"
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "io.papermc.paper:paper-api"
+      - dependency-name: "org.spigotmc:spigot"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
+      
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/1.19.2" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    registries:
+      - papermc
+      - spigot-repo
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "net.md-5:specialsource-maven-plugin"
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "io.papermc.paper:paper-api"
+      - dependency-name: "org.spigotmc:spigot"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
+      
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/1.19.3" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    registries:
+      - papermc
+      - spigot-repo
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "net.md-5:specialsource-maven-plugin"
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "io.papermc.paper:paper-api"
+      - dependency-name: "org.spigotmc:spigot"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
+      
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/Reflection" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    registries:
+      - papermc
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+      
+      - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
+        dependency-type: "production"
+        
+      - dependency-name: "io.netty:netty-transport"
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "io.papermc.paper:paper-api"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
