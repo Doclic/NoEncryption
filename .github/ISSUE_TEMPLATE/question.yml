@@ -1,0 +1,32 @@
+name: ❓ Plugin Question
+description: Ask a question about NoEncryption
+labels: question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## NoEncryption Question
+        
+        Before submitting a question issue, please make sure no other question issues exist for the question or subject you have.
+  - type: checkboxes
+    id: no-existing-issues
+    attributes:
+      label: Is there an existing question issue for this?
+      description: Please search to see if a question issue already exists for the question you have.
+      options:
+        - label: I have searched the existing question issues and have not found a duplicate relating to my question.
+          required: true
+  - type: textarea
+    id: subject
+    attributes:
+      label: Subject of Question
+      description: What is the subject that your question is relating to?
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What question(s) do you have relating to NoEncryption in detail?
+    validations:
+      required: true

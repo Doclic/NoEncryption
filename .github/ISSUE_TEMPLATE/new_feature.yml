@@ -1,0 +1,46 @@
+name: ❗ New Feature
+description: Request a new, unique feature for NoEncryption
+labels: enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## NoEncryption Feature Request
+        
+        Before submitting a new feature issue, please make sure no other enhancement issues exist for the feature you are requesting.
+  - type: checkboxes
+    id: no-existing-issues
+    attributes:
+      label: Is there an existing enhancement issue for this?
+      description: Please search to see if an enhancement issue already exists for the new feature you are requesting.
+      options:
+        - label: I have searched the existing enhancement issues and have not found a duplicate relating to my request.
+          required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose of New Feature
+      description: What is the purpose of the new feature you are requesting? How will this new feature benefit others that use the plugin? Is the new feature within a reasonable boundary?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Behavior of New Feature
+      description: What exactly will this new feature do? What problems can it solve? How would it operate?
+    validations:
+      required: true
+  - type: checkboxes
+    id: no-interference
+    attributes:
+      label: Would this new feature interfere with any existing functionalities of NoEncryption?
+      description: Does this new feature affect any of NoEncryption's current functions?
+      options:
+        - label: I do not believe this feature would affect NoEncryption's existing functions.
+          required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: Links? References? Anything that will give us more context for the feature you have in mind.
+    validations:
+      required: false

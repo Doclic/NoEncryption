@@ -1,0 +1,31 @@
+name: ❔ Other
+description: Issues that do not fall under the pre-defined list of templates
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Undefined NoEncryption Issue
+        
+        Before submitting an issue through this template, please make sure that your issue does not fall under any of the pre-defined templates, and an existing issue does not already exist.
+  - type: checkboxes
+    id: no-existing-issues
+    attributes:
+      label: Is there an existing question issue for this?
+      description: Please search to see if an issue already exists for the issue you have.
+      options:
+        - label: I have searched the existing issues and have not found a duplicate relating to my issue.
+          required: true
+  - type: textarea
+    id: subject
+    attributes:
+      label: Subject of Issue
+      description: What is the subject of your issue?
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What are the details of your issue?
+    validations:
+      required: true

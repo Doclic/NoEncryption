@@ -1,0 +1,81 @@
+name: 🐞 Bug Report
+description: Report a bug for NoEncryption
+labels: bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## NoEncryption Bug Report
+        
+        Before submitting a bug report issue, please make sure you are on the [latest release](https://github.com/Doclic/NoEncryption/releases) and have the proper JAR for the version you are running.
+        
+        ### Do not use this form to report a security issue. Refer to the links available in the Issues page.
+  - type: checkboxes
+    id: using-latest-ne
+    attributes:
+      label: Are you using the latest version of NoEncryption?
+      description: Please make sure you're using the latest version of NoEncryption as it's possible your issue has already been fixed.
+      options:
+        - label: I am using the latest version of NoEncryption compatible with my server version.
+          required: true
+  - type: checkboxes
+    id: no-existing-issues
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues and have not found a duplicate relating to my issue.
+          required: true
+  - type: input
+    id: ne-version
+    attributes:
+      label: NoEncryption Version
+      description: What NoEncryption version is your server running?
+      placeholder: ex. 4.2
+    validations:
+      required: true
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft Version
+      description: What Minecraft version is your server running?
+      placeholder: ex. 1.19.3
+    validations:
+      required: true
+  - type: input
+    id: server-build
+    attributes:
+      label: Server Type/Build
+      description: What server type and version are you running? Use the contents of /version or /about
+      placeholder: |
+        ex. This server is running CraftBukkit version 3663-Bukkit-b56426c (MC: 1.19.3) (Implementing API version 1.19.3-R0.1-SNAPSHOT)
+    validations:
+      required: true
+  - type: textarea
+    id: plugin-list
+    attributes:
+      label: Plugins in Use
+      description: Copy and paste a list of all the plugins your server is currently using. This can help us recreate your issue. You can leave this blank if you only use NoEncryption
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Startup Logs
+      description: Any notable startup logs? This can help us determine any outer sources of issues.
+      render: c
+    validations:
+      required: false
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproducible Test
+      description: Please write a test that can reliably reproduce the bug. Include any plugins that you may interact with in the time span.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: Links? References? Anything that will give us more context about the issue you are encountering
+    validations:
+      required: false
