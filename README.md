@@ -9,7 +9,7 @@ NoEncryption is a Minecraft <b>server</b> plugin developed by <a href="https://g
 
 NoEncryption supports versions <code>1.19</code>, <code>1.19.1</code>, <code>1.19.2</code>, and <code>1.19.3</code>. The latest stable downloads can be found <a href="https://github.com/Doclic/NoEncryption/releases/latest">here</a> in the <code>Assets</code> section near the bottom. 
 
-Latest Release: <a href="https://github.com/Doclic/NoEncryption/releases/latest"><img src="https://img.shields.io/github/v/tag/doclic/noencryption.svg?label=&sort=semver" /></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Release: <a href="https://github.com/Doclic/NoEncryption/releases/latest"><img src="https://img.shields.io/github/v/tag/doclic/noencryption.svg?label=&sort=semver" /></a>
 
 Currently, there is a multi-version compatible build, and 1.19.4 build in development, and is not yet compiled for downloading.
 
@@ -120,18 +120,34 @@ The generated config files/folders for NoEncryption are located at <code>plugins
 <details>
 <summary><code>settings</code></summary>
 
-<code>config.yml</code>:
-
-The main configuration file for NoEncryption features
+<br>
+<table>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>config.yml</code></td>
+<td>The main configuration file for NoEncryption.</td>
+</tr>
+</table>
 
 </details>
   
 <details>
 <summary><code>storage</code></summary>
 
-<code>notices.yml</code>:
-
-A list of suppressed notices that is stored using <code>/ne suppressnotices</code>. This file should not be manually modified.
+<br>
+<table>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>notices.yml</code></td>
+<td>The storage file for suppressed config notices. This file is automatically modified, and should not be edited manually.</td>
+</tr>
+</table>
 
 </details>
   
@@ -139,6 +155,7 @@ A list of suppressed notices that is stored using <code>/ne suppressnotices</cod
 
 ## Is there any way to remove the gray bar and indent?
 
+<img align=left height=70px src="https://user-images.githubusercontent.com/79623093/224067339-addb6165-8d78-460f-8e8c-fbeeaebb698f.png" />
 Currently, there is no way to remove the gray bar and indent without the use of texture packs. This is because it is in the clientside code to include the gray bar for unsigned messages, and always include the indentation. There is an available texture pack that solves this issue, which can be found <a href="https://modrinth.com/resourcepack/hide-chat-toasts-and-chat-bars/version/2.0">here</a>.
   
 ## Isn't injecting into a player's connection a security vulnerability?
@@ -147,11 +164,11 @@ Injecting the packet handler into the player's connection is in no way a vulnera
 
 ## What services does NoEncryption use?
 
-The only outside services that NoEncryption actively uses is bStats, and requests to the GitHub API. bStats is used to keep track of certain statistics of the plugin such as the build type, plugin version, server version, messages stripped, popups blocked, and other default bStats values. GitHub API requests are made to check for any updates to NoEncryption, which will be displayed at startup. For the bStats privacy policy, click <a href="https://bstats.org/privacy-policy">here</a>. Use of bStats and GitHub API can be toggled in the NoEncryption config.
+The only outside services that NoEncryption actively uses is bStats, and requests to the GitHub API. bStats is used to keep track of certain statistics of the plugin such as the build type, plugin version, server version, messages stripped, popups blocked, and other default bStats values. GitHub API requests are made to check for any updates to NoEncryption, which will be displayed at startup. For the bStats privacy policy, click <a href="https://bstats.org/privacy-policy">here</a>. For the GitHub privacy policy, click <a href="https://github.com/site/privacy">here</a>. Use of bStats and GitHub API can be toggled in the NoEncryption config.
 
 ## How can I report a bug with NoEncryption?
 
-To report a bug with NoEncryption, you can create an issue about the bug <a href="">here</a>. We ask that you make one issue per bug, and only one bug per issue. If your issue contains sensitive info, please notify us in the Discord Server, or email <a href="mailto:dev.v1nc3ntwastaken@gmail.com">dev.v1nc3ntwastaken@gmail.com</a>. (Both can be found at the top)
+To report a bug with NoEncryption, you can create an issue about the bug <a href="">here</a>. We ask that you make one issue per bug, and only one bug per issue. If your issue contains sensitive info, please notify us in the Discord Server, or email <a href="mailto:dev.v1nc3ntwastaken@gmail.com">dev.v1nc3ntwastaken@gmail.com</a>. (Both can be found at the top of the README)
 
 ## How can I contribute to NoEncryption?
 
@@ -326,3 +343,7 @@ After cloning NoEncryption, you can build the plugin through Maven using the fol
 </details>
 
 </details>
+
+## How can I support NoEncryption?
+
+We do not ask you for your money, or for your contributions as support. The kind of support that helps us is spreading the word of NoEncryption, and how it can prevent your servers from chat reports. Chat reports can be abused in favor of spammers and DDOSers who will raid a server with bots to spam-report a user's message. Before 1.19, chat messages were not monitored by Mojang/Microsoft, and were not reportable. After the 1.19 update, chat messages were being sent to Mojang/Microsoft servers for signatures. We believe this violates the privacy of a player, and so we are taking action against it. What we ask for is your help in spreading the word, and the plugin name out.
