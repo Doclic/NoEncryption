@@ -2,7 +2,7 @@
 
 <a href="https://bstats.org/plugin/bukkit/NoEncryption/17791"><img src="https://img.shields.io/badge/bStats-NoEncryption-00695C?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAJqUExURS8gDSseDS8fDy4fDygcCyccCyQYCCUaCiYaCiodDSwfDSwfDjAgDyodDCkdDCYaCSgbCyweDScbCy4gDi8hDjwmDz0mDzomEjglESkcDCgcDDgoFjopFzkpFzoqGEEvHEMwHE40HE80HE01H0ozHjooFjgmFSseDC8hEKZ9YbWIa7eJbrmLcMGSfLqIcLmIb7mLcbaIbqt2Wp5sUjcnFDAiDzQlEzwrGa2CZruNcLuMcb2Oc8WVf7yLcruKcb6OdbuLca95XaNwVUMvGzsqFqN4YaR4YrGBabKCaq6AaK2AaK6Bbq2AbZ1zXZ5zXbyKc7uIcJxoS5pmSZdlSZZlSax+Z61/aLiLdraKdKB1YK1/bKx/a550Xq5/aq5/aaNzWKJyVp5sT55rTrKCa7WIcvv18uXj4g4NDBUOC612ZLd+aruJcrKDbRMMCR4cHPPx8Pbw7K2Ba6h6Y7KBabWHcfz39Obk5AsKChIMCat0YbV7Z7qIcbGCbA8JBhsaGfX08/jy76yBa6d5Yp5lSaBnS7iEbLmFcKx6a6d3Z4VcRoNbRINbRYZeRq58Y7F/ZKt3V6d0U4VYOoNWOJphRJtjRq1zWa92XbJ+ba17aodeR4RcRYdeRrSAZbaBZJ9nRJtkQYFTNH9SM5FfRJliQ5NeQFs8KmJCL7mEab+JbV4+K49fP5BfP4JUOYFTOY1cQZNdP41ZPFc5J14/LLJ/ZLeDaF4+LFo7KI1cPY1dPYBSOHFGLXBFK21DK1k7KFg6KF0+K109KoJVO4NVO3tPNHpOM29FLG5ELG1DKmpCKVk6KFY5J1w9KoFUOv///50yV/QAAAABYktHRM1t0KNFAAAAB3RJTUUH5wMJAiAVBuCg5wAAARtJREFUGNMBEAHv/gAAAAEBAgMEBQYGBwgBAQkJAAAACgsMAg0ODw8QBBERCQkAAQEEEhAEExQVFhcYGRoEBAABCxscHR4fICEiIyQlJicOAAgoKSorLC0tLi8wMTIzNDUANjc4OTo7PDw9Pj9AQUJDRABFRkdISUpLTE1OT1BRUlNUAFVWV1hZWVpbXE5dXl9gYWIAY2RlZmdoaWprbG1ub3BxcgBzdHV2d3h5ent8fX5/gIGCAIOEhYaHiImKi4yNjo+QkZIAk5SVlpeYmZqam5ydnp+goQCioqOkpaanqKinpqmqq6ytAK6ur7CxsrO0tLO1tre4rbkAurq7vL2+v7+/v77AwcLDxADFxsfIyb6xysqxscvMwsTEmLti2uDbC+gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDMtMDlUMDI6MzI6MjErMDA6MDBS0Ex7AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTAzLTA5VDAyOjMyOjIxKzAwOjAwI430xwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMy0wOVQwMjozMjoyMSswMDowMHSY1RgAAAAASUVORK5CYII=" /></a> <a href="https://github.com/Doclic/NoEncryption/"><img src="https://img.shields.io/badge/GitHub-NoEncryption-161B22?logo=github" /></a> <a href="https://www.spigotmc.org/resources/102902/"><img src="https://img.shields.io/badge/SpigotMC-NoEncryption-ED8106?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAASUExURQAAAAAAAP/QAOLoPzpG6P///6KUBJkAAAABdFJOUwBA5thmAAAAAWJLR0QF+G/pxwAAAAd0SU1FB+cDBxQfCitCL98AAABKSURBVAgdBcEBEQMgDASwcIcAniloUbBhAP+qliBJFhgBjAKkFrB7AfsskL5fJPvcCt19bveS9P3tLnxujS6MxC5AApgPMB9gvj++cgakaycDWQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0wN1QyMDozMTowOSswMDowMGmdOS8AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMDdUMjA6MzE6MDkrMDA6MDAYwIGTAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTA3VDIwOjMxOjEwKzAwOjAwFuflAQAAAABJRU5ErkJggg==" /></a> <a href="https://discord.gg/5aZFvWx5Qq"><img src="https://img.shields.io/badge/Discord-NoEncryption-404EED?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAF3UExURQAAAFhl8Vdk8Vdl8Vhk8Vdk8Vhl8Vdl8Vdk8Vdk8Vdl8Vdl8Vhl8lhl8Vhk8Vhl8lhl8ldl8Vhk8Vdl8Vhl8Vhl8lhl8lhl8lhk8ldl8Vdl8Vhk8lhk8Vdl8Vhl8lhl8Vhk8Vhk8Vdl8Vhl8Vdk8Vdl8Vhk8Vdl8Vdk8Vdk8Vdl8Vdk8Vhk8Vdk8Vdl8Vhk8Vhl8Vdk8Vdk8Vhl8Vdk8Vhk8Vhl8Vdk8Vhk8Vhk8Vhk8Vhk8Vhl8mBs8mJu8mBt8mdy86Ws+Nve/P39/snO+oON9Y6X9srO+mRw8vDy/f////Dx/bq/+Wx38/v7/rG3+Ozt/enr/fX2/vX1/uvt/XR/9LC2+GJv8uTm/GNv8paf9mt286qw+Jae9q20+ISN9cLH+q2z+Lm/+e3u/aCn97a8+f7+/re8+bvA+a60+Pf4/sHG+vf3/ltn8qeu+OHj/HWA9IKM9a+1+IOM9XaA9OLk/Kat+Fpn8mdz89/h/N/i/O/x/WZy89U2A4oAAAA8dFJOUwAQXJzM7Pz8zpxcECie9vaeCo76+o4KJtTUJjLs7DLsCtSOKPoonp4Q9sz8/Mz2KI4K1AomMjKO+lzOEGll4RUAAAABYktHREoeDLXGAAAAB3RJTUUH5wMJAToeI1k97QAAAalJREFUOMuFk+k7QkEUxqd06SZL2SlbSRSR7AdZSsa+RSRJSLJlubY/3p3Fbbs93g8z5/zeU/PcmXMQUqTRVuiEyipBLxqqUamMNbWgqK7eWGSbzA1QoMam5ny/pRVK1Nae8zssoCJrp/L7LlCVlf9Hdw+UUZuJFpihrHqJb2tU8rl5ss4vKMDeJxc4eOJfXFpeCQSDgdXlpUU/h/0IOfn9hNZwntZDjA44kZbXbuACbXCsRSILNrcKC7Y2GReRngXbuEjbjA8igQU7BO7ukXV/l6wHjAvIRfdDwsJwdIzxcQTCJDukhgu56X5C0ClAFOMowCnJzqjh5kfECDoHiGMcBwiQ7IIfMUT3BEGXyatrjK9vkpckS1BDzz8zhUuU4p/JLupWJum7DLMyd2l5jVHDwK/6/kFmj0/PyWw2+fL6Jhe9S4QPa5TH+givf0oslL6+sz8srJFf02Pn1y5F/l45Iv21ru2fhhmhHTXqLed7x1hT+qzqvkVp/HHVthYmcoPhUznF68sfre7JqULbbjYVTafNkTe8tQ6Pynw7p8UZi8tt0YnTszn6C14XzYjxEgTWAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTAzLTA5VDAxOjU4OjI5KzAwOjAwI2I0WAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wMy0wOVQwMTo1ODoyOSswMDowMFI/jOQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDMtMDlUMDE6NTg6MzArMDA6MDBcGOh2AAAAAElFTkSuQmCC" /></a> <a href="mailto:dev.v1nc3ntwastaken@gmail.com"><img src="https://img.shields.io/badge/Email-dev.v1nc3ntwastaken@gmail.com-C5221F?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAIlUExURQAAANIeHtQqKv+qAP/DAMAiG8ciH8giH8kiH8YjIPm7Av2/A/y/BP2/BPi6BswZGcQiHschILsiIu67APu9Bfu7A/+yAMQiHeA5Lu9FNek6OvJrJvq6BMUgHO5ENuxCNexAN/q9BMgdFOxDNt1EM/+5AI5Lde1DNelFNauzJTSJ/+1DNSGnW0KF8upCNTKnU0OD77pRZO9CMO9ANbxoNzirUCiF//U+J+5DNfg6NBm1VkGD8+RBNO1DNTKqUeI4OOpCNe1ENelCM+xDNOxDNt8/P0GD8jGkUkOG9jGqVTZ/7EKE80OD8zCoUjSnUzajSD+P/0KJ+EGG9kGD80KF8zemTTOpUzasVi2lS88kIcciH8ojIMkjIP7ABP/BBP6+BP/GBMYiH8UiH80kIP/EBPy9BPu8BPy8BMQiH+c8MfVkKvu+A/2+BMkhHOA6L+5FN+9ENu1AN+5iKP++A7ksNcofGOtENutDNfRGN+o/Nv+9Aem8DFV42aU7VMoeFsYiHupDNfFFN8m3GFCsSUCI+0SD8YlPgcYhHccgG+1ENu5ENv68A/y8A5+zKDipUi+pVkOG9kGG9j6I+2xlsLoqMckeF/+/AOm6C3SuOi2nVjKoVDSpVEKF9D2J/FR316Q6U+g6LexENus/NvdkKMm5F0+rSCynVjSoUz+H+S+oVUKI+fJFNzOqVEOH+PNGNzWqVDWrVUWL/0SJ/DewVzauVjavV////ysef3gAAABZdFJOUwARBgYRJbDl0F5e0OWwJQrJlw8Pl8kKNMkwMMk0Pu1g7T49lw8+PckwPT/tPT2VPf27+vq7/T9O5U47Qie9QgmK/VTBwQg+Pjk5DsRERMQOEFBZWRcXWVARdONlGQAAAAFiS0dEtqoHC/EAAAAHdElNRQfnAwkCBzCXIcbFAAABhklEQVQ4y2NgGCSAkQmbKDMLlMHKxs7BiSnPxc3Dywdi8AtERkXHCAqhSguLxMbFJ4iKAZniiUlJSYnJEpLI8lLSKalpaempMkC2bBRQQVJGppw8Ql5eISs7DQhyFIEcpVywgrz8AmUViLSKckFhEVhBsSqQq1ZSClZQVl6hrgGS11CvKK8EK6iq1gTytWpq6+pBChoaGrWB1shrNzY0gBSkVzU16wAV6La0trV3gBU0dHbp6XV1NoAVdPf09vXrgxRMmDhp8pSpYAUN5Y2N5Q1gBdOmz5g5azZEwZw5c+fNX7CwAQksWrxk6bLly+EK5qwwMDTqQsh3GZuYrlyOrGDOKjNzi9Uw+dUWllZrlqMqWGvNYGO7Dmx/+TpbGwa79ZgKGOwdHIHWdDk62DNgV8DA4GSxerWFE4iFQwGDjbOLDQM+BQyurgz4FcAAkgI3fArcgUyPtbgVbPAEMr28N27atGmjD6oC381btmzZ6ucPYgcEBgUHB4WgKggNA4LwCOrnIJoAAKHc1DIYkEARAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTAzLTA5VDAyOjA3OjQ3KzAwOjAwiKTdgwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wMy0wOVQwMjowNzo0NyswMDowMPn5ZT8AAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDMtMDlUMDI6MDc6NDcrMDA6MDCu7ETgAAAAAElFTkSuQmCC" /></a>
 
-<p><img align=right src="https://user-images.githubusercontent.com/79623093/223548813-7c3e30dc-8cd9-41c0-a704-35d48c16b428.png">
+<img align=right src="https://user-images.githubusercontent.com/79623093/223548813-7c3e30dc-8cd9-41c0-a704-35d48c16b428.png" />
 NoEncryption is a Minecraft <b>server</b> plugin developed by <a href="https://github.com/Doclic/" target="_blank">Doclic</a> and <a href="https://github.com/V1nc3ntWasTaken/" target="_blank">V1nc3ntWasTaken</a>. NoEncryption, or NE for short, is a Minecraft plugin intended to combat against the new chat reporting system implemented in 1.19. NoEncryption is your first, and last solution to this new chat reporting system by stripping messages of their signatures so there is no way for a client to validate that a chat message or command came from a certain player, thus making your messages un-reportable.
 
 ## What versions does NoEncryption support?
@@ -14,8 +14,132 @@ Latest Release: <a href="https://github.com/Doclic/NoEncryption/releases/latest"
 Currently, there is a multi-version compatible build, and 1.19.4 build in development, and is not yet compiled for downloading.
 
 ## How does NoEncryption work?
-  
+
+<img align=right src="https://user-images.githubusercontent.com/79623093/223909733-979c8cdf-faa5-499d-afe3-4bd1fef8a7ac.png" />
 NoEncryption works by stripping chat packets of their signatures before they are sent back to your client, and other clients. NoEncryption modifies outbound packets specifically to allow other plugins such as chat managers, and filters to properly modify chat contents before reaching NoEncryption. NoEncryption injects into a player's connection line, allowing it to modify the chat packets before they are sent to the client. Popup blocking works in the same way.
+
+## Commands and permissions
+
+Check the tables below for a list of commands, and permissions that NoEncryption has:
+
+<details>
+<summary>Commands</summary>
+
+<br>
+<table>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Permission</th>
+<th>Restrictions</th>
+</tr>
+<tr>
+<td><code>/ne</code></td>
+<td>Display the help menu in chat/console.</td>
+<td><code>noencryption.usecommand</code></td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>/ne suppressnotices</code></td>
+<td>Suppress config notices on startup</td>
+<td><code>noencryption.command.suppressnotices</code></td>
+<td>Only executable by Console</td>
+</tr>
+<tr>
+<td><code>/ne checkforupdates</code></td>
+<td>Manually check for updates on GitHub</td>
+<td><code>noencryption.command.checkforupdates</code></td>
+<td>None</td>
+</tr>
+</table>
+
+</details>
+
+<details>
+<summary>Permissions</summary>
+
+<br>
+<table>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+<th>Default</th>
+<th>Children</th>
+</tr>
+<tr>
+<td><code>noencryption.*</code></td>
+<td>Grants all NoEncryption permissions.</td>
+<td><code>op</code></td>
+<td>
+<ul>
+<li><code>noencryption.usecommand</code></li>
+<li><code>noencryption.command.*</code></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><code>noencryption.usecommand</code></td>
+<td>Allows usage of <code>/ne</code>.</td>
+<td><code>true</code></td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>noencryption.command.*</code></td>
+<td>Allows usage of all <code>/ne</code> subcommands.</td>
+<td><code>op</code></td>
+<td>
+<ul>
+<li><code>noencryption.command.suppressnotices</code></li>
+<li><code>noencryption.command.checkforupdates</code></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><code>noencryption.command.suppressnotices</code></td>
+<td>Allows usage of <code>/ne suppressnotices</code>.</td>
+<td><code>op</code></td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>noencryption.command.checkforupdates</code></td>
+<td>Allows usage of <code>/ne checkforupdates</code>.</td>
+<td><code>op</code></td>
+<td>None</td>
+</tr>
+</table>
+
+</details>
+
+## Where are the config files?
+
+The generated config files/folders for NoEncryption are located at <code>plugins/NoEncryption/</code>. There are a few folders available here: <code>settings</code>, and <code>storage</code>.
+
+<details>
+<summary>Folders</summary>
+  
+<details>
+<summary><code>settings</code></summary>
+
+<code>config.yml</code>:
+
+The main configuration file for NoEncryption features
+
+</details>
+  
+<details>
+<summary><code>storage</code></summary>
+
+<code>notices.yml</code>:
+
+A list of suppressed notices that is stored using <code>/ne suppressnotices</code>. This file should not be manually modified.
+
+</details>
+  
+</details>
+
+## Is there any way to remove the gray bar and indent?
+
+Currently, there is no way to remove the gray bar and indent without the use of texture packs. This is because it is in the clientside code to include the gray bar for unsigned messages, and always include the indentation. There is an available texture pack that solves this issue, which can be found <a href="https://modrinth.com/resourcepack/hide-chat-toasts-and-chat-bars/version/2.0">here</a>.
   
 ## Isn't injecting into a player's connection a security vulnerability?
 
@@ -23,7 +147,7 @@ Injecting the packet handler into the player's connection is in no way a vulnera
 
 ## What services does NoEncryption use?
 
-The only outside services that NoEncryption actively uses is a service called bStats. bStats is used to keep track of certain statistics of the plugin such as the build type, plugin version, server version, messages stripped, popups blocked, and other default bStats values. For the bStats privacy policy, click <a href="https://bstats.org/privacy-policy">here</a>. Use of bStats can be toggled in the NoEncryption config.
+The only outside services that NoEncryption actively uses is bStats, and requests to the GitHub API. bStats is used to keep track of certain statistics of the plugin such as the build type, plugin version, server version, messages stripped, popups blocked, and other default bStats values. GitHub API requests are made to check for any updates to NoEncryption, which will be displayed at startup. For the bStats privacy policy, click <a href="https://bstats.org/privacy-policy">here</a>. Use of bStats and GitHub API can be toggled in the NoEncryption config.
 
 ## How can I report a bug with NoEncryption?
 
