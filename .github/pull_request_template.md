@@ -1,3 +1,16 @@
+<details>
+<summary>By creating a pull request, you agree to the following</summary>
+
+<ul>
+<li>The code included in this PR is in no way malicious, or used for my personal gain.</li>
+<li>The code included in this PR is intended to benefit, add a universal feature, fix a bug(s), or make a function more efficient.</li>
+<li>The code included in this PR is <b>not</b> intended for one time use/personal use. (ex. compatibility with your personal plugin)</li>
+<li>The code included in this PR follows the licensing of it's origination.</li>
+<li>The code included in this PR is tested, and follows all laws, regulations, rules, and other listed restrictions.</li>
+</ul>
+
+</details>
+
 ## Type of Change
 
 What type of fix(es) are included in this pull request?
