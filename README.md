@@ -31,7 +31,7 @@ To report a bug with NoEncryption, you can create an issue about the bug <a href
 
 ## How can I contribute to NoEncryption?
 
-You can make contributions to the NoEncryption project through the use of <a href="https://github.com/Doclic/NoEncryption/pulls">Pull Requests</a>. When making a contribution, make sure that you review all the checks in the PR, as well as follow the Contribution Guidelines.
+You can make contributions to the NoEncryption project through the use of <a href="https://github.com/Doclic/NoEncryption/pulls">Pull Requests</a>. When making a contribution, make sure that you review all the checks in the PR.
 
 <details>
 <summary>Contributing and Building</summary>
