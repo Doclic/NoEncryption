@@ -101,7 +101,8 @@ public class NMSInterface {
     }
 
     public static Object getNetworkManager(Object playerConnection) throws IllegalAccessException {
-        if(networkManagerField == null) networkManagerField = getField(playerConnection.getClass(), "b");
+        if(networkManagerField == null)
+            if (Compatibility.SERVER_VERSION.singleNumber == 11904) networkManagerField = getField(playerConnection.getClass(), "h"); else networkManagerField = getField(playerConnection.getClass(), "b");
         return networkManagerField.get(playerConnection);
     }
 

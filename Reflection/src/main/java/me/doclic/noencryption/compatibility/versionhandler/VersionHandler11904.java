@@ -35,7 +35,7 @@ public class VersionHandler11904 implements VersionHandler {
     static {
         PLAYER_CHAT_PACKET_CLASS = NMSInterface.getClass("net.minecraft.network.protocol.game.ClientboundPlayerChatPacket");
         PLAYER_CHAT_SIGNED_BODY_FIELD = NMSInterface.getField(PLAYER_CHAT_PACKET_CLASS, "d");
-        SIGNED_BODY_CONTENT_FIELD = NMSInterface.getField(PLAYER_CHAT_SIGNED_BODY_FIELD.getType(), "b");
+        SIGNED_BODY_CONTENT_FIELD = NMSInterface.getField(PLAYER_CHAT_SIGNED_BODY_FIELD.getType(), "a");
         PLAYER_CHAT_UNSIGNED_CONTENT_FIELD = NMSInterface.getField(PLAYER_CHAT_PACKET_CLASS, "e");
         PLAYER_CHAT_TYPE_FIELD = NMSInterface.getField(PLAYER_CHAT_PACKET_CLASS, "g");
 //        SYS_CHAT_PACKET_CLASS = NMSInterface.getClass("net.minecraft.network.protocol.game.ClientboundSystemChatPacket");
@@ -49,13 +49,12 @@ public class VersionHandler11904 implements VersionHandler {
                 boolean.class
         );
         COMPONENT_COPY_METHOD = NMSInterface.getMethod(COMPONENT_CLASS, "e");
-        //todo double check "$ChatSerializer" may now be "$Serializer"
         JSON_TO_COMPONENT_METHOD = NMSInterface.getMethod(NMSInterface.getClass(componentClassName + "$ChatSerializer"), "a", String.class);
         LITERAL_COMPONENT_METHOD = NMSInterface.getMethod(COMPONENT_CLASS, "b", String.class);
         SERVER_DATA_PACKET_CLASS = NMSInterface.getClass("net.minecraft.network.protocol.game.ClientboundServerDataPacket");
         SERVER_DATA_MOTD_FIELD = NMSInterface.getField(SERVER_DATA_PACKET_CLASS, "a");
         SERVER_DATA_ICON_FIELD = NMSInterface.getField(SERVER_DATA_PACKET_CLASS, "b");
-        SERVER_DATA_PACKET_CONSTRUCTOR = NMSInterface.getConstructor(SERVER_DATA_PACKET_CLASS, COMPONENT_CLASS, String.class, boolean.class);
+        SERVER_DATA_PACKET_CONSTRUCTOR = NMSInterface.getConstructor(SERVER_DATA_PACKET_CLASS, COMPONENT_CLASS, Optional.class, boolean.class);
     }
 
     @Override
@@ -67,12 +66,11 @@ public class VersionHandler11904 implements VersionHandler {
             if(content != null) content = COMPONENT_COPY_METHOD.invoke(content);
             final var nmsServer = NMSInterface.getNMSServer();
 
-            if(serverRegistryAccessMethod == null) serverRegistryAccessMethod = NMSInterface.getMethod(nmsServer.getClass()/*.getSuperclass()*/, "aW");
+            if(serverRegistryAccessMethod == null) serverRegistryAccessMethod = NMSInterface.getMethod(nmsServer.getClass()/*.getSuperclass()*/, "aX");
             if(chatTypeResolveMethod == null) chatTypeResolveMethod = NMSInterface.getMethod(PLAYER_CHAT_TYPE_FIELD.getType(), "a", NMSInterface.getClass("net.minecraft.core.IRegistryCustom"));
             final var chatType =
                     ((Optional<?>) chatTypeResolveMethod.invoke(PLAYER_CHAT_TYPE_FIELD.get(packet), serverRegistryAccessMethod.invoke(nmsServer))).orElseThrow();
 
-            //todo double check "a"
             if(chatTypeDecorateMethod == null) chatTypeDecorateMethod = NMSInterface.getMethod(chatType.getClass(), "a", COMPONENT_CLASS);
 
             InternalMetrics.insertChart(new Metrics.SingleLineChart("strippedMessages", () -> 1));
@@ -105,7 +103,7 @@ public class VersionHandler11904 implements VersionHandler {
 
                 // recreate a new packet
                 return SERVER_DATA_PACKET_CONSTRUCTOR.newInstance(
-                        ((Optional<?>) SERVER_DATA_MOTD_FIELD.get(packet)).get(),
+                        SERVER_DATA_MOTD_FIELD.get(packet),
                         ((Optional<String>) SERVER_DATA_ICON_FIELD.get(packet)).orElse(""),
                         true
                 );
