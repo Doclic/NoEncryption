@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 
 public class Compatibility {
     public static final MinecraftVersion MIN_VERSION = new MinecraftVersion(1, 19);
-    public static final MinecraftVersion MAX_VERSION = new MinecraftVersion(1, 19, 3);
+    public static final MinecraftVersion MAX_VERSION = new MinecraftVersion(1, 19, 4);
     public static final MinecraftVersion SERVER_VERSION;
     public static final VersionHandler VERSION_HANDLER;
     public static final boolean SERVER_COMPATIBLE;
@@ -15,7 +15,7 @@ public class Compatibility {
         String minecraftVersion;
 
         try {
-            // getBukkitVersion() returns it in this format: "1.19.3-R0.1-SNAPSHOT"
+            // getBukkitVersion() returns it in this format: "1.19.4-R0.1-SNAPSHOT"
             // If the version couldn't be found, it returns "Unknown-Version"
             minecraftVersion = Bukkit.getBukkitVersion();
         } catch (ArrayIndexOutOfBoundsException exception) {
@@ -74,7 +74,8 @@ public class Compatibility {
         if(SERVER_COMPATIBLE) VERSION_HANDLER = switch(SERVER_VERSION.singleNumber) {
             case 11900 -> new VersionHandler11900();
             case 11901, 11902 -> new VersionHandler11901();
-            default -> new VersionHandler11903();
+            case 11903 -> new VersionHandler11903();
+            default -> new VersionHandler11904();
         };
         else VERSION_HANDLER = null;
     }
