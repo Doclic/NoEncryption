@@ -100,7 +100,7 @@ updates:
       include: "scope"
     labels:
       - "dependabot"
-      
+
   - package-ecosystem: "maven" # See documentation for possible values
     directory: "/1.19.3" # Location of package manifests
     schedule:
@@ -111,10 +111,35 @@ updates:
     allow:
       - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
         dependency-type: "production"
-      
+
       - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
         dependency-type: "production"
-      
+
+      - dependency-name: "net.md-5:specialsource-maven-plugin"
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "io.papermc.paper:paper-api"
+      - dependency-name: "org.spigotmc:spigot"
+    commit-message:
+      prefix: "[DependaBot] "
+      include: "scope"
+    labels:
+      - "dependabot"
+
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/1.19.4" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    registries:
+      - papermc
+      - spigot-repo
+    allow:
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
+        dependency-type: "production"
+
+      - dependency-name: "org.apache.maven.plugins:maven-shade-plugin"
+        dependency-type: "production"
+
       - dependency-name: "net.md-5:specialsource-maven-plugin"
         dependency-type: "production"
     ignore:

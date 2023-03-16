@@ -96,7 +96,7 @@ Do the applied changes require testing? (Depends on if core components were chan
   
   <br>
   
-  <b>1.19.4 Tests (Not Yet Available)</b>
+  <b>1.19.4 Tests</b>
   - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
   - [ ] Tested player joining
   - [ ] Tested chats **Player -> Server**
