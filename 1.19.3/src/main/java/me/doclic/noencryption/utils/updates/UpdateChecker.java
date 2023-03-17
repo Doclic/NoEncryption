@@ -36,12 +36,8 @@ public class UpdateChecker {
 
                 Bukkit.getScheduler().runTask(NoEncryption.plugin(), () -> {
                     switch (compare) {
-                        case -1:
-                            callbackIfOld.run();
-                            break;
-                        default:
-                            callbackIfSameOrNew.run();
-                            break;
+                        case -1 -> callbackIfOld.run();
+                        default -> callbackIfSameOrNew.run();
                     }
                 });
             } catch (IOException | ParseException e) {

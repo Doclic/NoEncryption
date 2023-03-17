@@ -33,31 +33,26 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
         try {
             switch (args[0].toLowerCase()) {
-                case "suppressnotices":
+                case "suppressnotices" -> {
                     if (!sender.hasPermission("noencryption.command.suppressnotices")) {
                         Chat.sendChat(sender, "&c[NoEncryption] You do not have permission to run this command!");
                         return true;
                     }
-
                     if (!(sender instanceof ConsoleCommandSender)) {
                         Chat.sendChat(sender, "&c[NoEncryption] You can not run this command as a player!");
                         return true;
                     }
-
                     if (ConfigurationHandler.Notices.suppressNotices())
                         Chat.sendChat(sender, "&c[NoEncryption] &7Start up config messages suppressed");
                     else
                         Chat.sendChat(sender, "&c[NoEncryption] There are no active config messages to suppress");
-
-                    break;
-                case "checkforupdates":
+                }
+                case "checkforupdates" -> {
                     if (!sender.hasPermission("noencryption.command.suppressnotices")) {
                         Chat.sendChat(sender, "&c[NoEncryption] You do not have permission to run this command!");
                         return true;
                     }
-
                     Chat.sendChat(sender, "&c[NoEncryption] &7Checking for updates...");
-
                     UpdateChecker.check(
                             () -> {
                                 Chat.sendChat(sender, "&c[NoEncryption] &7There is a new update available. You can download it here:");
@@ -73,10 +68,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                                 Chat.sendChat(sender, "https://www.githubstatus.com/");
                             }
                     );
-
-                    break;
-                default:
-                    Chat.sendChat(sender, "&c[NoEncryption] Invalid argument \"" + ChatColor.stripColor(args[0]) + "\"!");
+                }
+                default ->
+                        Chat.sendChat(sender, "&c[NoEncryption] Invalid argument \"" + ChatColor.stripColor(args[0]) + "\"!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             // Makes it easier to iterate through, and less code
