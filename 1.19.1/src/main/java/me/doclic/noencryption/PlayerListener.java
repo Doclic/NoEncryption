@@ -46,6 +46,12 @@ public class PlayerListener implements Listener {
     public void onPlayerQuit (PlayerQuitEvent e) {
         final Player player = e.getPlayer();
         final Channel channel = Compatibility.COMPATIBLE_PLAYER.getChannel(player);
-        channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption_playerlevel"));
+
+        try {
+            channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption_playerlevel"));
+        } catch (NullPointerException ex) {
+            NoEncryption.logger().warning("Could not remove the packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
+            ex.printStackTrace();
+        }
     }
 }
