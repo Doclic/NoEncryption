@@ -279,73 +279,8 @@ After cloning NoEncryption, you can build the plugin through Maven using the fol
 <code>mvn clean install</code>
 3. After the above command completes, run the following command to build the JAR files:
 <code>mvn clean package</code>
-4. After the above command completes, inside the module folders (ex. <code>1.19</code>, <code>1.19.3</code>, <code>Reflection</code>), a new <code>target</code> folder will be created.
+4. After the above command completes, a new <code>target</code> folder will be created.
 5. Inside the <code>target</code> folder will be multiple JAR files. The JAR file that should be used is <code>NoEncryption-MODULE-VERSION.jar</code>. Do not use JAR files starting/ending with <code>original-</code>, <code>-remapped.jar</code>, or <code>-remapped-obf.jar</code>.
-
-</details>
-
-<details>
-<summary>Building NoEncryption for 1.19</summary>
-
-1. Open the cloned NoEncryption/1.19 folder in a terminal window.
-2. Run the following command to download the needed dependencies: (You should only need to run this once)
-<code>mvn clean install</code>
-3. After the above command completes, run the following command to build the JAR files:
-<code>mvn clean package</code>
-4. After the above command completes, a new <code>target</code> folder will be created.
-5. Inside the <code>target</code> folder will be multiple JAR files. The JAR file that should be used is <code>NoEncryption-1.19-VERSION.jar</code>. Do not use JAR files starting/ending with <code>original-</code>, <code>-remapped.jar</code>, or <code>-remapped-obf.jar</code>.
-
-</details>
-
-<details>
-<summary>Building NoEncryption for 1.19.1</summary>
-
-1. Open the cloned NoEncryption/1.19.1 folder in a terminal window.
-2. Run the following command to download the needed dependencies: (You should only need to run this once)
-<code>mvn clean install</code>
-3. After the above command completes, run the following command to build the JAR files:
-<code>mvn clean package</code>
-4. After the above command completes, a new <code>target</code> folder will be created.
-5. Inside the <code>target</code> folder will be multiple JAR files. The JAR file that should be used is <code>NoEncryption-1.19.1-VERSION.jar</code>. Do not use JAR files starting/ending with <code>original-</code>, <code>-remapped.jar</code>, or <code>-remapped-obf.jar</code>.
-
-</details>
-
-<details>
-<summary>Building NoEncryption for 1.19.2</summary>
-
-1. Open the cloned NoEncryption/1.19.2 folder in a terminal window.
-2. Run the following command to download the needed dependencies: (You should only need to run this once)
-<code>mvn clean install</code>
-3. After the above command completes, run the following command to build the JAR files:
-<code>mvn clean package</code>
-4. After the above command completes, a new <code>target</code> folder will be created.
-5. Inside the <code>target</code> folder will be multiple JAR files. The JAR file that should be used is <code>NoEncryption-1.19.2-VERSION.jar</code>. Do not use JAR files starting/ending with <code>original-</code>, <code>-remapped.jar</code>, or <code>-remapped-obf.jar</code>.
-
-</details>
-
-<details>
-<summary>Building NoEncryption for 1.19.3</summary>
-
-1. Open the cloned NoEncryption/1.19.3 folder in a terminal window.
-2. Run the following command to download the needed dependencies: (You should only need to run this once)
-<code>mvn clean install</code>
-3. After the above command completes, run the following command to build the JAR files:
-<code>mvn clean package</code>
-4. After the above command completes, a new <code>target</code> folder will be created.
-5. Inside the <code>target</code> folder will be multiple JAR files. The JAR file that should be used is <code>NoEncryption-1.19.3-VERSION.jar</code>. Do not use JAR files starting/ending with <code>original-</code>, <code>-remapped.jar</code>, or <code>-remapped-obf.jar</code>.
-
-</details>
-
-<details>
-<summary>Building NoEncryption for Reflection</summary>
-
-1. Open the cloned NoEncryption/Reflection folder in a terminal window.
-2. Run the following command to download the needed dependencies: (You should only need to run this once)
-<code>mvn clean install</code>
-3. After the above command completes, run the following command to build the JAR files:
-<code>mvn clean package</code>
-4. After the above command completes, a new <code>target</code> folder will be created.
-5. Inside the <code>target</code> folder will be multiple JAR files. The JAR file that should be used is <code>NoEncryption-Reflection-VERSION.jar</code>. Do not use JAR files starting/ending with <code>original-</code>, <code>-remapped.jar</code>, or <code>-remapped-obf.jar</code>.
 
 </details>
 
