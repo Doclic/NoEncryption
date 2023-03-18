@@ -18,7 +18,8 @@ public interface VersionHandler {
 
     default void listen(Player player) {
         try {
-            NMSInterface.getNettyChannel(player).pipeline().addBefore("packet_handler", PACKET_HANDLER_NAME, new ChannelDuplexHandler() {
+            final Channel channel = NMSInterface.getNettyChannel(player);
+            channel.pipeline().addBefore("packet_handler", PACKET_HANDLER_NAME, new ChannelDuplexHandler() {
                 @Override
                 public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                     try {
@@ -53,6 +54,8 @@ public interface VersionHandler {
                     if(msg != null) super.write(ctx, msg, promise);
                 }
             });
+
+            NoEncryption.addPlayerChannel(channel);
         } catch (InvocationTargetException | IllegalAccessException e) {
             NoEncryption.logger().severe("Couldn't add NE packet handler for player " + player.getName() + " (" + player.getUniqueId() + ")");
             NoEncryption.logger().severe("The player has been kicked to prevent them from being able to report others");
