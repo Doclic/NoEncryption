@@ -61,8 +61,8 @@ body:
   - type: textarea
     id: logs
     attributes:
-      label: Startup Logs
-      description: Any notable startup logs? This can help us determine any outer sources of issues.
+      label: Startup/Running Logs
+      description: Any notable error or warning logs? This can help us determine any outer sources of issues.
       render: c
     validations:
       required: false
