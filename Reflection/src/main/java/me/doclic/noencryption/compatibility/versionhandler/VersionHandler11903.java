@@ -103,8 +103,8 @@ public class VersionHandler11903 implements VersionHandler {
 
                 // recreate a new packet
                 return SERVER_DATA_PACKET_CONSTRUCTOR.newInstance(
-                        ((Optional<?>) SERVER_DATA_MOTD_FIELD.get(packet)).get(),
-                        ((Optional<String>) SERVER_DATA_ICON_FIELD.get(packet)).orElse(""),
+                        ((Optional<?>) SERVER_DATA_MOTD_FIELD.get(packet)).orElse(null),
+                        ((Optional<String>) SERVER_DATA_ICON_FIELD.get(packet)).orElse(null),
                         true
                 );
             }
