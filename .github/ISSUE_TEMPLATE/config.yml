@@ -2,4 +2,4 @@ blank_issues_enabled: false
 contact_links:
   - name: Discord Tickets
     url: https://discord.gg/5aZFvWx5Qq
-    about: Please report security vulnerabilities and other private matters in the Discord Server by creating a ticket for your issue.
+    about: Please report security vulnerabilities and other sensitive issues in the Discord Server by creating a ticket for your issue, or DMing a NoEncryption developer.
