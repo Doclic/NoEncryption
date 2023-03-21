@@ -67,7 +67,7 @@ body:
     - '1.19.3'
     - '1.19.4'
   id: mc-version
-  type: input
+  type: dropdown
   validations:
     required: true
 - attributes:
