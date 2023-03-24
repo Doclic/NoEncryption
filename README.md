@@ -16,12 +16,10 @@ NoEncryption is a Minecraft <b>server</b> plugin developed by <a href="https://g
 
 ## What versions does NoEncryption support?
 
-NoEncryption supports versions <code>1.19</code>, <code>1.19.1</code>, <code>1.19.2</code>, and <code>1.19.3</code>. The latest stable downloads can be found <a href="https://github.com/Doclic/NoEncryption/releases/latest">here</a> in the <code>Assets</code> section near the bottom. 
+NoEncryption supports versions <code>1.19</code> through <code>1.19.4</code>. The latest stable downloads can be found <a href="https://github.com/Doclic/NoEncryption/releases/latest">here</a> in the <code>Assets</code> section near the bottom.
+The Reflection build is compatible with multiple versions, but might run a bit slower.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Release: <a href="https://github.com/Doclic/NoEncryption/releases/latest"><img src="https://img.shields.io/github/v/tag/doclic/noencryption.svg?label=&sort=semver" /></a>
-
-Currently, there is a multi-version compatible build, and 1.19.4 build in development, and is not yet compiled for downloading.
-
 ## How does NoEncryption work?
 
 <img align=right src="https://user-images.githubusercontent.com/79623093/223909733-979c8cdf-faa5-499d-afe3-4bd1fef8a7ac.png" />
