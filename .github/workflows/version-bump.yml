@@ -1,0 +1,166 @@
+name: "[Maven] Bump Version"
+
+on:
+  workflow_dispatch:
+  release:
+    types: [ published ]
+
+jobs:
+  check-previous-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Fetch previous release tag if manual
+        id: get-previous-tag-manual
+        if: github.event_name == 'workflow_dispatch'
+        uses: octokit/request-action@v2.1.0
+        with:
+          token: ${{ github.token }}
+          route: GET /repos/${{ github.repository }}/releases/latest
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+
+      - name: Set variable if manual
+        id: set-var-manual
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "PREV_TAG=${{ fromJSON(steps.get-previous-tag-manual.outputs.data).tag_name }}" >> $GITHUB_ENV
+
+      - name: Fetch previous release tag if release
+        id: get-previous-tag-release
+        if: github.event_name == 'release'
+        run: |
+          echo "PREV_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Get current POM
+        id: get-version
+        uses: entimaniac/read-pom-version-action@1.0.0
+
+      - name: Format previous
+        id: format-previous
+        uses: frabert/replace-string-action@v2.4
+        with:
+          pattern: "(\\.)"
+          string: ${{ env.PREV_TAG }}
+          replace-with: "0"
+
+      - name: Format current
+        id: format-current
+        uses: frabert/replace-string-action@v2.4
+        with:
+          pattern: "(\\.)"
+          string: ${{ steps.get-version.outputs.version }}
+          replace-with: "0"
+
+      - name: Previous tag equal to POM version
+        id: equal
+        if: ${{ steps.format-previous.outputs.replaced == steps.format-current.outputs.replaced }}
+        run: |
+          echo "MAJOR_RELEASE=0" >> $GITHUB_ENV
+
+      - name: Previous tag less than POM version
+        id: bigger
+        if: ${{ steps.format-previous.outputs.replaced < steps.format-current.outputs.replaced }}
+        run: |
+          echo "MAJOR_RELEASE=1" >> $GITHUB_ENV
+
+    outputs:
+      previous-version: ${{ env.PREV_TAG }}
+      major: ${{ env.MAJOR_RELEASE }}
+  generate-new-version:
+    runs-on: ubuntu-latest
+    needs: [ check-previous-release ]
+
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        id: setup-py
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: '3.11'
+
+      - name: Run python script
+        id: run-py
+        run: |
+          cd .github/workflows/scripts/version-bump-evaluator/
+          python3 version-bump-evaluator.py -m ${{ needs.check-previous-release.outputs.major }} -v ${{ needs.check-previous-release.outputs.previous-version }}
+          echo ${{ env.NEW_VER }}
+
+    outputs:
+      new-version: ${{ env.NEW_VER }}
+  version-bump:
+    runs-on: ubuntu-latest
+    needs: [ generate-new-version ]
+
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java JDK 17
+        id: setup-jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Cache local Maven repository
+        id: cache-repo
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven
+
+      - name: Bump POM
+        id: bump-pom
+        run: |
+          mvn org.codehaus.mojo:versions-maven-plugin:set -DnewVersion='${{ needs.generate-new-version.outputs.new-version }}' -DprocessAllModules=true -DgenerateBackupPoms=false
+
+      - name: Create PR for new version
+        id: create-pr
+        uses: peter-evans/create-pull-request@v4.2.3
+        with:
+          commit-message: Version bump to ${{ needs.generate-new-version.outputs.new-version }}
+
+          branch: version-bump-${{ needs.generate-new-version.outputs.new-version }}
+          delete-branch: true
+
+          base: main
+
+          title: '[Workflow] Version bump to ${{ needs.generate-new-version.outputs.new-version }}'
+          body: Automated PR through workflow
+
+      - name: Store branch
+        id: store-branch
+        uses: octokit/request-action@v2.1.0
+        with:
+          token: ${{ github.token }}
+          route: GET /repos/${{ github.repository }}/pulls/${{ steps.create-pr.outputs.pull-request-number }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+
+    outputs:
+      branch: ${{ fromJSON(steps.store-branch.outputs.data).head.ref }}
+  branch-compile-noencryption:
+    runs-on: ubuntu-latest
+    needs: [version-bump]
+
+    steps:
+      - name: Run workflow
+        id: run-workflow
+        run: |
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ github.token }}"\
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/Doclic/NoEncryption/actions/workflows/compile-noencryption.yml/dispatches \
+            -d '{"ref":"${{ needs.version-bump.outputs.branch }}"}'
