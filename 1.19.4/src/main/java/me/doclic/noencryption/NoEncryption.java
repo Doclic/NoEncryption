@@ -6,26 +6,37 @@ import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
 import me.doclic.noencryption.utils.FileMgmt;
 import me.doclic.noencryption.utils.InternalMetrics;
+import me.doclic.noencryption.utils.PlayerChannelGC;
+import me.doclic.noencryption.utils.ServerChannelGC;
 import me.doclic.noencryption.utils.updates.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 public final class NoEncryption extends JavaPlugin {
     private static NoEncryption plugin;
     private static Logger logger;
-    public static HashMap<UUID, Channel> serverChannels;
-    public static BukkitTask timerTask;
-    public static BukkitTask testerTask;
+    public static Map<UUID, Channel> serverChannels;
+    public static List<Channel> activePlayerChannels;
+    public static List<Channel> activeServerChannels;
+
+    private static BukkitTask connectionCatchTask;
+    private static BukkitTask playerGarbageCollectorTask;
+    private static BukkitTask serverGarbageCollectorTask;
+
+    public static final String playerHandlerName = "noencryption_playerlevel";
+    public static final String serverHandlerName = "noencryption_serverlevel";
 
     @Override
     public void onEnable() {
         plugin = this;
         logger = getLogger();
+        serverChannels = new HashMap<>();
+        activePlayerChannels = Collections.unmodifiableList(new ArrayList<>());
+        activeServerChannels = Collections.unmodifiableList(new ArrayList<>());
 
         if (Compatibility.SERVER_COMPATIBLE) {
             FileMgmt.initialize(this);
@@ -43,26 +54,27 @@ public final class NoEncryption extends JavaPlugin {
             getCommand("noencryption").setExecutor(new MainCommand());
             getCommand("noencryption").setTabCompleter(new MainCommand());
 
-            serverChannels = new HashMap<>();
-            PlayerListener.startConnectionListenTimer();
+            startTasks();
 
-            Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);if (ConfigurationHandler.Config.doAutoUpdateCheck())
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+
+            if (ConfigurationHandler.Config.doAutoUpdateCheck())
                 UpdateChecker.check(
-                        () -> {
-                            logger().info("You are running an old version of NoEncryption.");
-                            logger().info("It is recommended to update to the latest version");
-                            logger().info("for the best experience. The update can be found here:");
-                            logger().info(UpdateChecker.updateUrl.toString());
-                        },
-                        () -> {
-                            logger().info("Your NoEncryption version is up-to-date");
-                        },
-                        () -> {
-                            logger().info("Could not check for the latest version of NoEncryption.");
-                            logger().info("It is recommended to update to the latest version");
-                            logger().info("for the best experience. The update can be found here:");
-                            logger().info(UpdateChecker.updateUrl.toString());
-                        }
+                    () -> {
+                        logger().info("You are running an old version of NoEncryption.");
+                        logger().info("It is recommended to update to the latest version");
+                        logger().info("for the best experience. The update can be found here:");
+                        logger().info(UpdateChecker.updateUrl.toString());
+                    },
+                    () -> {
+                        logger().info("Your NoEncryption version is up-to-date");
+                    },
+                    () -> {
+                        logger().info("Could not check for the latest version of NoEncryption.");
+                        logger().info("It is recommended to update to the latest version");
+                        logger().info("for the best experience. The update can be found here:");
+                        logger().info(UpdateChecker.updateUrl.toString());
+                    }
                 );
 
             logger().info("Compatibility successful!");
@@ -95,7 +107,19 @@ public final class NoEncryption extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        PlayerListener.stopConnectionListenTimer();
+        stopTasks();
+    }
+
+    private static void startTasks() {
+        connectionCatchTask = ConnectionListener.start();
+        serverGarbageCollectorTask = ServerChannelGC.start();
+        playerGarbageCollectorTask = PlayerChannelGC.start();
+    }
+
+    private static void stopTasks() {
+        ConnectionListener.stop(connectionCatchTask);
+        ServerChannelGC.stop(serverGarbageCollectorTask);
+        PlayerChannelGC.stop(playerGarbageCollectorTask);
     }
 
     public static NoEncryption plugin() {
@@ -118,5 +142,29 @@ public final class NoEncryption extends JavaPlugin {
         } catch (ClassNotFoundException e) {
             return false;
         }
+    }
+
+    public static void addPlayerChannel(Channel channel) {
+        List<Channel> modified = new ArrayList<>(activePlayerChannels);
+        modified.add(channel);
+        activePlayerChannels = Collections.unmodifiableList(modified);
+    }
+
+    public static void removePlayerChannel(Channel channel) {
+        List<Channel> modified = new ArrayList<>(activePlayerChannels);
+        modified.remove(channel);
+        activePlayerChannels = Collections.unmodifiableList(modified);
+    }
+
+    public static void addServerChannel(Channel channel) {
+        List<Channel> modified = new ArrayList<>(activeServerChannels);
+        modified.add(channel);
+        activeServerChannels = Collections.unmodifiableList(modified);
+    }
+
+    public static void removeServerChannel(Channel channel) {
+        List<Channel> modified = new ArrayList<>(activeServerChannels);
+        modified.remove(channel);
+        activeServerChannels = Collections.unmodifiableList(modified);
     }
 }

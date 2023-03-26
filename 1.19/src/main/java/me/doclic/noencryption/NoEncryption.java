@@ -1,24 +1,36 @@
 package me.doclic.noencryption;
 
+import io.netty.channel.Channel;
 import me.doclic.noencryption.commands.MainCommand;
 import me.doclic.noencryption.compatibility.Compatibility;
 import me.doclic.noencryption.config.ConfigurationHandler;
+import me.doclic.noencryption.utils.PlayerChannelGC;
 import me.doclic.noencryption.utils.FileMgmt;
 import me.doclic.noencryption.utils.InternalMetrics;
 import me.doclic.noencryption.utils.updates.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Logger;
 
 public final class NoEncryption extends JavaPlugin {
     private static NoEncryption plugin;
     private static Logger logger;
+    public static List<Channel> activePlayerChannels;
+
+    private static BukkitTask playerGarbageCollectorTask;
+
+    public static final String playerHandlerName = "noencryption_playerlevel";
 
     @Override
     public void onEnable() {
         plugin = this;
         logger = getLogger();
+        activePlayerChannels = Collections.unmodifiableList(new ArrayList<>());
 
         if (Compatibility.SERVER_COMPATIBLE) {
             FileMgmt.initialize(this);
@@ -35,6 +47,8 @@ public final class NoEncryption extends JavaPlugin {
 
             getCommand("noencryption").setExecutor(new MainCommand());
             getCommand("noencryption").setTabCompleter(new MainCommand());
+
+            startTasks();
 
             Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
@@ -86,6 +100,19 @@ public final class NoEncryption extends JavaPlugin {
 
     }
 
+    @Override
+    public void onDisable() {
+        stopTasks();
+    }
+
+    private static void startTasks() {
+        playerGarbageCollectorTask = PlayerChannelGC.start();
+    }
+
+    private static void stopTasks() {
+        PlayerChannelGC.stop(playerGarbageCollectorTask);
+    }
+
     public static NoEncryption plugin() {
         return plugin;
     }
@@ -106,5 +133,17 @@ public final class NoEncryption extends JavaPlugin {
         } catch (ClassNotFoundException e) {
             return false;
         }
+    }
+
+    public static void addPlayerChannel(Channel channel) {
+        List<Channel> modified = new ArrayList<>(activePlayerChannels);
+        modified.add(channel);
+        activePlayerChannels = Collections.unmodifiableList(modified);
+    }
+
+    public static void removePlayerChannel(Channel channel) {
+        List<Channel> modified = new ArrayList<>(activePlayerChannels);
+        modified.remove(channel);
+        activePlayerChannels = Collections.unmodifiableList(modified);
     }
 }

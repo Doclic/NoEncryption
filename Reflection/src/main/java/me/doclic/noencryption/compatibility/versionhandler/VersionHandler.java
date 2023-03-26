@@ -1,5 +1,6 @@
 package me.doclic.noencryption.compatibility.versionhandler;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
@@ -17,7 +18,8 @@ public interface VersionHandler {
 
     default void listen(Player player) {
         try {
-            NMSInterface.getNettyChannel(player).pipeline().addBefore("packet_handler", PACKET_HANDLER_NAME, new ChannelDuplexHandler() {
+            final Channel channel = NMSInterface.getNettyChannel(player);
+            channel.pipeline().addBefore("packet_handler", PACKET_HANDLER_NAME, new ChannelDuplexHandler() {
                 @Override
                 public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                     try {
@@ -52,6 +54,8 @@ public interface VersionHandler {
                     if(msg != null) super.write(ctx, msg, promise);
                 }
             });
+
+            NoEncryption.addPlayerChannel(channel);
         } catch (InvocationTargetException | IllegalAccessException e) {
             NoEncryption.logger().severe("Couldn't add NE packet handler for player " + player.getName() + " (" + player.getUniqueId() + ")");
             NoEncryption.logger().severe("The player has been kicked to prevent them from being able to report others");
@@ -78,6 +82,29 @@ public interface VersionHandler {
         }
     }
 
+    default void stop(Player player) {
+        try {
+            final Channel channel = NMSInterface.getNettyChannel(player);
+
+            channel.eventLoop().submit(() -> channel.pipeline().remove(PACKET_HANDLER_NAME));
+        } catch (InvocationTargetException | IllegalAccessException | NullPointerException e) {
+            NoEncryption.logger().warning("Couldn't remove NE packet handler for player " + player.getName() + " (" + player.getUniqueId() + ")");
+            NoEncryption.logger().warning("Did you use \"/reload\"?");
+            NoEncryption.logger().warning("To fix this, try updating NoEncryption by downloading a JAR from");
+            NoEncryption.logger().warning("https://github.com/Doclic/NoEncryption/releases");
+            NoEncryption.logger().warning("You can download the multi-version JAR which is slower but supports multiple versions");
+            NoEncryption.logger().warning("or you can also download a JAR for your specific version which may fix the issue");
+            NoEncryption.logger().warning("If the issue persists this might mean that your server is running on an unsupported");
+            NoEncryption.logger().warning("Minecraft version, in which case you'll have to wait for the developers to update NE");
+            NoEncryption.logger().warning("This NoEncryption build supports versions 1.19-1.19.3");
+            NoEncryption.logger().warning("Otherwise, please create an issue on the NoEncryption GitHub at");
+            NoEncryption.logger().warning("https://github.com/Doclic/NoEncryption/issues");
+            NoEncryption.logger().warning("And provide the following:");
+            NoEncryption.logger().warning("Minecraft version, server implementation (such as Spigot, Paper, etc), NE version,");
+            NoEncryption.logger().warning("and the stacktrace shown below");
+            e.printStackTrace();
+        }
+    }
 
     default Object readPacket(Object packet) throws Exception { return packet; }
     Object writePacket(Object packet) throws Exception;

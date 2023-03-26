@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
@@ -19,5 +20,11 @@ public class PlayerListener implements Listener {
                 Chat.sendChat(player, ConfigurationHandler.Config.getLoginProtectionMessage());
             }
         }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerQuit (PlayerQuitEvent e) {
+        final Player player = e.getPlayer();
+        Compatibility.VERSION_HANDLER.stop(player);
     }
 }

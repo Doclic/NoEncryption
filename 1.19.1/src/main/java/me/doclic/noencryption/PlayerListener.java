@@ -14,7 +14,8 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin (PlayerJoinEvent e) {
         final Player player = e.getPlayer();
-        final ChannelPipeline pipeline = Compatibility.COMPATIBLE_PLAYER.getChannel(player).pipeline();
+        final Channel channel = Compatibility.COMPATIBLE_PLAYER.getChannel(player);
+        final ChannelPipeline pipeline = channel.pipeline();
         final ChannelDuplexHandler handler = new ChannelDuplexHandler() {
             @Override
             public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
@@ -30,9 +31,9 @@ public class PlayerListener implements Listener {
         };
 
         if (pipeline.get("packet_handler") == null) {
-            pipeline.addLast("noencryption_playerlevel", handler);
+            pipeline.addLast(NoEncryption.playerHandlerName, handler);
         } else {
-            pipeline.addBefore("packet_handler", "noencryption_playerlevel", handler);
+            pipeline.addBefore("packet_handler", NoEncryption.playerHandlerName, handler);
         }
 
         if (ConfigurationHandler.Config.getLoginProtectionMessage() != null) {
@@ -40,12 +41,20 @@ public class PlayerListener implements Listener {
                 Chat.sendChat(player, ConfigurationHandler.Config.getLoginProtectionMessage());
             }
         }
+
+        NoEncryption.addPlayerChannel(channel);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit (PlayerQuitEvent e) {
         final Player player = e.getPlayer();
         final Channel channel = Compatibility.COMPATIBLE_PLAYER.getChannel(player);
-        channel.eventLoop().submit(() -> channel.pipeline().remove("noencryption_playerlevel"));
+
+        try {
+            channel.eventLoop().submit(() -> channel.pipeline().remove(NoEncryption.playerHandlerName));
+        } catch (NullPointerException ex) {
+            NoEncryption.logger().warning("Could not remove the packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
+            ex.printStackTrace();
+        }
     }
 }
