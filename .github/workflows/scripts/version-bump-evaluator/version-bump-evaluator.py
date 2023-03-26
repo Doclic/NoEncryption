@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+import os
 
 def pre_main():
     arg_parser = argparse.ArgumentParser(
@@ -41,6 +42,6 @@ def create_new_version(version):
     return str(version_0) + "." + str(version_1)
 
 def add_env(name, value):
-    subprocess.run("echo \"{0}={1}\" >> $GITHUB_OUTPUT".format(name, value))
+    os.system(f'echo "{name}={value}" >> $GITHUB_ENV')
 
 pre_main()
