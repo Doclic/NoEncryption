@@ -1,0 +1,33 @@
+name: "[BuildTools] Compile BuildTools"
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  compile-buildtools:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Java 17
+        id: setup-jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven BuildTools repository
+        id: cache-repo
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ubuntu-maven-buildtools
+
+      - name: Compile BuildTools
+        id: compile-bt-1_19
+        uses: SpraxDev/Action-SpigotMC@v4
+        with:
+          versions: 1.19, 1.19.1, 1.19.2, 1.19.3, 1.19.4
+          remapped: true
