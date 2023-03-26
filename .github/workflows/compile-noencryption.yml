@@ -1,0 +1,51 @@
+name: "[Maven] Compile NoEncryption"
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+
+jobs:
+  compile-buildtools:
+    uses: Doclic/NoEncryption/.github/workflows/compile-buildtools.yml@main
+
+  compile-noencryption:
+    runs-on: ubuntu-latest
+    needs: [compile-buildtools]
+
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java JDK 17
+        id: setup-jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Cache local Maven repository
+        id: cache-repo
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven
+
+      - name: Clean project cache
+        id: clean-project-cache
+        run: mvn -B clean
+
+      - name: Build NoEncryption
+        id: build-project
+        run: mvn -B -U package
+
+      - name: Install NoEncryption to cache
+        id: install-project
+        run: mvn -B install
