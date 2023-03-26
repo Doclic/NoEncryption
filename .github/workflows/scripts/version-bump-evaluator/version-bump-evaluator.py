@@ -41,6 +41,6 @@ def create_new_version(version):
     return str(version_0) + "." + str(version_1)
 
 def add_env(name, value):
-    subprocess.run("echo \"{0}{1}\" >> $GITHUB_OUTPUT".format(name, value))
+    subprocess.run("echo \"{0}={1}\" >> $GITHUB_OUTPUT".format(name, value))
 
 pre_main()
