@@ -23,29 +23,68 @@ jobs:
         id: checkout
         uses: actions/checkout@v3
 
-      - name: Set up Java JDK 17
-        id: setup-jdk
+      - name: Set up Java 17
+        id: setup-java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven
 
-      - name: Cache local Maven repository
+      - name: Load Maven BuildTools cache
         id: cache-repo
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven
-
-      - name: Clean project cache
-        id: clean-project-cache
-        run: mvn -B clean
+          key: ubuntu-maven-buildtools
 
       - name: Build NoEncryption
         id: build-project
         run: mvn -B -U package
 
-      - name: Install NoEncryption to cache
-        id: install-project
-        run: mvn -B install
+      - name: Get current POM
+        id: get-version
+        uses: entimaniac/read-pom-version-action@1.0.0
+
+      - name: Upload artifact 1.19
+        id: artifact-upload-11900
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: NoEncryption-1.19-${{ steps.get-version.outputs.version }}
+          path: target/NoEncryption-1.19-**.jar
+
+      - name: Upload artifact 1.19.1
+        id: artifact-upload-11901
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: NoEncryption-1.19.1-${{ steps.get-version.outputs.version }}
+          path: target/NoEncryption-1.19.1-**.jar
+
+      - name: Upload artifact 1.19.2
+        id: artifact-upload-11902
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: NoEncryption-1.19.2-${{ steps.get-version.outputs.version }}
+          path: target/NoEncryption-1.19.2-**.jar
+
+      - name: Upload artifact 1.19.3
+        id: artifact-upload-11903
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: NoEncryption-1.19.3-${{ steps.get-version.outputs.version }}
+          path: target/NoEncryption-1.19.3-**.jar
+
+      - name: Upload artifact 1.19.4
+        id: artifact-upload-11904
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: NoEncryption-1.19.4-${{ steps.get-version.outputs.version }}
+          path: target/NoEncryption-1.19.4-**.jar
+
+      - name: Upload artifact Reflection
+        id: artifact-upload-reflection
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: NoEncryption-Reflection-${{ steps.get-version.outputs.version }}
+          path: target/NoEncryption-Reflection-**.jar
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
