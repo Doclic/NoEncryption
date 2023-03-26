@@ -50,8 +50,8 @@ public class CompatiblePacketListener {
                 if (ConfigurationHandler.Config.getDisableBanner()) {
                     // recreate a new packet
                     return new ClientboundServerDataPacket(
-                            clientboundServerDataPacket.getMotd().get(),
-                            clientboundServerDataPacket.getIconBase64().orElse(""),
+                            clientboundServerDataPacket.getMotd().orElse(null),
+                            clientboundServerDataPacket.getIconBase64().orElse(null),
                             true
                     );
                 }
