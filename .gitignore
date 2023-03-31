@@ -111,3 +111,7 @@ buildNumber.properties
 
 # Common working directory
 run/
+
+# Draft release workflow
+workflows/scripts/draft-release-markdown-generator/output.md
+workflows/scripts/draft-release-markdown-generator/temp/
