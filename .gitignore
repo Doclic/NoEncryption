@@ -113,5 +113,5 @@ buildNumber.properties
 run/
 
 # Draft release workflow
-workflows/scripts/draft-release-markdown-generator/output.md
-workflows/scripts/draft-release-markdown-generator/temp/
+/.github/workflows/scripts/draft-release-markdown-generator/output.md
+/.github/workflows/scripts/draft-release-markdown-generator/temp
