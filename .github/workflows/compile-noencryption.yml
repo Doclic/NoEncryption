@@ -1,6 +1,7 @@
 name: "[Maven] Compile NoEncryption"
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
   pull_request:
