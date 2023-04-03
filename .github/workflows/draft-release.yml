@@ -28,8 +28,14 @@ jobs:
         python draft-release-markdown-generator.py -n ../../../meta -r Doclic/NoEncryption -t ${{ steps.get-version.outputs.version }}
       shell: sh
     
+    - name: Read output.md
+      id: read-md
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: .github/workflows/scripts/draft-release-markdown-generator/output.md
+
     outputs:
-      markdown: ${{ steps.run-py.outputs.contents }}
+      markdown: ${{ steps.read-md.outputs.content }}
       version: ${{ steps.get-version.outputs.version }}
   generate-release:
     runs-on: ubuntu-latest
@@ -46,17 +52,6 @@ jobs:
       with:
         name: NoEncryption
         path: NoEncryption/
-      
-    - name: Zip install
-      id: zip-install
-      uses: montudor/action-zip@v1.0.0
-      
-    - name: Unzip artifacts
-      id: artifact-zip
-      run: |
-        cd NoEncryption/
-        unzip NoEncryption.zip
-        rm NoEncryption.zip
           
     - name: Generate draft release
       id: generate-release
