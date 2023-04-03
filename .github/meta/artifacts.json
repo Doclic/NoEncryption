@@ -1,0 +1,26 @@
+{
+    "NoEncryption-1.19-{0}.jar": {
+        "version-min": "1.19",
+        "version-max": "1.19"
+    },
+    "NoEncryption-1.19.1-{0}.jar": {
+        "version-min": "1.19.1",
+        "version-max": "1.19.1"
+    },
+    "NoEncryption-1.19.2-{0}.jar": {
+        "version-min": "1.19.2",
+        "version-max": "1.19.2"
+    },
+    "NoEncryption-1.19.3-{0}.jar": {
+        "version-min": "1.19.3",
+        "version-max": "1.19.3"
+    },
+    "NoEncryption-1.19.4-{0}.jar": {
+        "version-min": "1.19.4",
+        "version-max": "1.19.4"
+    },
+    "NoEncryption-Reflection-{0}.jar": {
+        "version-min": "1.19",
+        "version-max": "1.19.4"
+    }
+}
