@@ -70,7 +70,7 @@ class WebHandler:
     def download_file(url, destination):
         return urlretrieve(url, destination)
 
-def calculate_changes(tag, changes, meta, file_order, module_order, artifacts_detail):
+def calculate_changes(tag, previous, changes, meta, file_order, module_order, artifacts_detail):
     final_str = ""
 
     final_str += "# NoEncryption " + tag + "\n"
@@ -82,6 +82,10 @@ def calculate_changes(tag, changes, meta, file_order, module_order, artifacts_de
     final_str += "## Smaller Changes" + "\n"
     final_str += "\n"
     final_str += "- " + "\n"
+    final_str += "\n"
+    final_str += "## Detailed Change List" + "\n"
+    final_str += "\n"
+    final_str += "- " + f"https://github.com/Doclic/NoEncryption/compare/{previous}...{tag}" + "\n"
     final_str += "\n"
     final_str += "### Notable Modifications" + "\n"
     final_str += "\n"
@@ -347,14 +351,16 @@ def pre_main():
     arg_parser.add_argument("-n", "--new-meta", help="New meta location", default="../../../meta")
     arg_parser.add_argument("-r", "--repo", help="Repository to pull data from. Format: OWNER/REPO", default="Doclic/NoEncryption")
     arg_parser.add_argument("-t", "--tag", help="Release tag")
+    arg_parser.add_argument("-p", "--previous", help="Previous tag")
 
     args = arg_parser.parse_args()
 
-    global repository, new_meta, tag
+    global repository, new_meta, tag, previous
 
     repository = args.repo
     new_meta = args.new_meta
     tag = args.tag
+    previous = args.previous
 
     main()
 
@@ -654,7 +660,7 @@ def main():
         if name not in file_name_changes:
             file_name_changes[name] = {"status":"NONE", "paths":{"before":latest_meta_names.get(name), "after":new_meta_names.get(name)}}
 
-    markdown = calculate_changes(tag, file_name_changes, file_meta, file_order, module_order, artifacts_detail_file)
+    markdown = calculate_changes(tag, previous, file_name_changes, file_meta, file_order, module_order, artifacts_detail_file)
 
     print("Moving changes to", markdown_output_file)
     FileUtils.write_file(markdown_output_file, markdown)
