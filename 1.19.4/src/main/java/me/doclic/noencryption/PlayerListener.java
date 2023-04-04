@@ -65,13 +65,18 @@ public class PlayerListener implements Listener {
         }
 
         try {
-            channel.eventLoop().submit(() -> channel.pipeline().remove(NoEncryption.playerHandlerName));
-
-            serverChannel.eventLoop().submit(() -> serverChannel.pipeline().remove("noencryption_serverlevel"));
+            serverChannel.eventLoop().submit(() -> serverChannel.pipeline().remove(NoEncryption.serverHandlerName));
             NoEncryption.serverChannels.remove(player.getUniqueId());
         } catch (NullPointerException ex) {
-            NoEncryption.logger().warning("Could not remove the packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
-            ex.printStackTrace();
+            NoEncryption.logger().warning("Could not remove the server packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
+            NoEncryption.logger().warning("This is not a fatal error, will be cleaned in garbage collection, and can be safely ignored");
+        }
+
+        try{
+            channel.eventLoop().submit(() -> channel.pipeline().remove(NoEncryption.playerHandlerName));
+        } catch (NullPointerException ex) {
+            NoEncryption.logger().warning("Could not remove the player packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
+            NoEncryption.logger().warning("This is not a fatal error, will be cleaned in garbage collection, and can be safely ignored");
         }
     }
 }

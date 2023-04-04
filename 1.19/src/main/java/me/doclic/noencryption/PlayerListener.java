@@ -53,8 +53,8 @@ public class PlayerListener implements Listener {
         try {
             channel.eventLoop().submit(() -> channel.pipeline().remove(NoEncryption.playerHandlerName));
         } catch (NullPointerException ex) {
-            NoEncryption.logger().warning("Could not remove the packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
-            ex.printStackTrace();
+            NoEncryption.logger().warning("Could not remove the player packet handler for " + player.getName() + " (" + player.getUniqueId() + ")");
+            NoEncryption.logger().warning("This is not a fatal error, will be cleaned in garbage collection, and can be safely ignored");
         }
     }
 }

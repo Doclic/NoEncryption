@@ -89,7 +89,7 @@ public interface VersionHandler {
             channel.eventLoop().submit(() -> channel.pipeline().remove(PACKET_HANDLER_NAME));
         } catch (InvocationTargetException | IllegalAccessException | NullPointerException e) {
             NoEncryption.logger().warning("Couldn't remove NE packet handler for player " + player.getName() + " (" + player.getUniqueId() + ")");
-            NoEncryption.logger().warning("Did you use \"/reload\"?");
+            NoEncryption.logger().warning("It is possible this will be cleaned in garbage collection. Did you use \"/reload\"?");
             NoEncryption.logger().warning("To fix this, try updating NoEncryption by downloading a JAR from");
             NoEncryption.logger().warning("https://github.com/Doclic/NoEncryption/releases");
             NoEncryption.logger().warning("You can download the multi-version JAR which is slower but supports multiple versions");
