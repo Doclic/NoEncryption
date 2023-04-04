@@ -1,0 +1,74 @@
+{
+    "1.19": {
+        "/ne suppressnotices": {
+            "name": "/ne suppressnotices",
+            "description": "Suppress startup notices. (Console only)",
+            "permission": "noencryption.command.suppressnotices"
+        },
+        "/ne checkforupdates": {
+            "name": "/ne checkforupdates",
+            "description": "Manually checks for updates through GitHub",
+            "permission": "noencryption.command.checkforupdates"
+        }
+    },
+    "1.19.1": {
+        "/ne suppressnotices": {
+            "name": "/ne suppressnotices",
+            "description": "Suppress startup notices. (Console only)",
+            "permission": "noencryption.command.suppressnotices"
+        },
+        "/ne checkforupdates": {
+            "name": "/ne checkforupdates",
+            "description": "Manually checks for updates through GitHub",
+            "permission": "noencryption.command.checkforupdates"
+        }
+    },
+    "1.19.2": {
+        "/ne suppressnotices": {
+            "name": "/ne suppressnotices",
+            "description": "Suppress startup notices. (Console only)",
+            "permission": "noencryption.command.suppressnotices"
+        },
+        "/ne checkforupdates": {
+            "name": "/ne checkforupdates",
+            "description": "Manually checks for updates through GitHub",
+            "permission": "noencryption.command.checkforupdates"
+        }
+    },
+    "1.19.3": {
+        "/ne suppressnotices": {
+            "name": "/ne suppressnotices",
+            "description": "Suppress startup notices. (Console only)",
+            "permission": "noencryption.command.suppressnotices"
+        },
+        "/ne checkforupdates": {
+            "name": "/ne checkforupdates",
+            "description": "Manually checks for updates through GitHub",
+            "permission": "noencryption.command.checkforupdates"
+        }
+    },
+    "1.19.4": {
+        "/ne suppressnotices": {
+            "name": "/ne suppressnotices",
+            "description": "Suppress startup notices. (Console only)",
+            "permission": "noencryption.command.suppressnotices"
+        },
+        "/ne checkforupdates": {
+            "name": "/ne checkforupdates",
+            "description": "Manually checks for updates through GitHub",
+            "permission": "noencryption.command.checkforupdates"
+        }
+    },
+    "Reflection": {
+        "/ne suppressnotices": {
+            "name": "/ne suppressnotices",
+            "description": "Suppress startup notices. (Console only)",
+            "permission": "noencryption.command.suppressnotices"
+        },
+        "/ne checkforupdates": {
+            "name": "/ne checkforupdates",
+            "description": "Manually checks for updates through GitHub",
+            "permission": "noencryption.command.checkforupdates"
+        }
+    }
+}

@@ -1,6 +1,7 @@
 name: "[Maven] Compile NoEncryption"
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
   pull_request:
@@ -45,46 +46,11 @@ jobs:
         id: get-version
         uses: entimaniac/read-pom-version-action@1.0.0
 
-      - name: Upload artifact 1.19
-        id: artifact-upload-11900
+      - name: Upload artifacts
+        id: artifact-upload
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: NoEncryption-1.19-${{ steps.get-version.outputs.version }}
-          path: target/NoEncryption-1.19-**.jar
-
-      - name: Upload artifact 1.19.1
-        id: artifact-upload-11901
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: NoEncryption-1.19.1-${{ steps.get-version.outputs.version }}
-          path: target/NoEncryption-1.19.1-**.jar
-
-      - name: Upload artifact 1.19.2
-        id: artifact-upload-11902
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: NoEncryption-1.19.2-${{ steps.get-version.outputs.version }}
-          path: target/NoEncryption-1.19.2-**.jar
-
-      - name: Upload artifact 1.19.3
-        id: artifact-upload-11903
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: NoEncryption-1.19.3-${{ steps.get-version.outputs.version }}
-          path: target/NoEncryption-1.19.3-**.jar
-
-      - name: Upload artifact 1.19.4
-        id: artifact-upload-11904
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: NoEncryption-1.19.4-${{ steps.get-version.outputs.version }}
-          path: target/NoEncryption-1.19.4-**.jar
-
-      - name: Upload artifact Reflection
-        id: artifact-upload-reflection
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: NoEncryption-Reflection-${{ steps.get-version.outputs.version }}
-          path: target/NoEncryption-Reflection-**.jar
+          name: NoEncryption
+          path: target/**.jar
     outputs:
       version: ${{ steps.get-version.outputs.version }}

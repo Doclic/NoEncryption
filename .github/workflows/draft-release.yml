@@ -1,0 +1,67 @@
+name: "[Releases] Generate Draft Release"
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  compile-noencryption:
+    uses: Doclic/NoEncryption/.github/workflows/compile-noencryption.yml@main
+
+  generate-markdown:
+    runs-on: ubuntu-latest
+    needs: [compile-noencryption]
+
+    steps:
+    - name: Checkout repository
+      id: checkout
+      uses: actions/checkout@v3
+          
+    - name: Get current POM version
+      id: get-version
+      uses: entimaniac/read-pom-version-action@1.0.0
+
+    - name: Run python script
+      id: run-py
+      run: |
+        cd .github/workflows/scripts/draft-release-markdown-generator/
+        python draft-release-markdown-generator.py -n ../../../meta -r Doclic/NoEncryption -t ${{ steps.get-version.outputs.version }}
+      shell: sh
+    
+    - name: Read output.md
+      id: read-md
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: .github/workflows/scripts/draft-release-markdown-generator/output.md
+
+    outputs:
+      markdown: ${{ steps.read-md.outputs.content }}
+      version: ${{ steps.get-version.outputs.version }}
+  generate-release:
+    runs-on: ubuntu-latest
+    needs: [generate-markdown]
+
+    steps:
+    - name: Checkout repository
+      id: checkout
+      uses: actions/checkout@v3
+
+    - name: Download build artifacts
+      id: download-build-artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: NoEncryption
+        path: NoEncryption/
+          
+    - name: Generate draft release
+      id: generate-release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: |
+          NoEncryption/**.jar
+        body: ${{ needs.generate-markdown.outputs.markdown }}
+        draft: true
+        name: ${{ needs.generate-markdown.outputs.version }}
+        skipIfReleaseExists: true
+        replacesArtifacts: false
+        tag: ${{ needs.generate-markdown.outputs.version }}
