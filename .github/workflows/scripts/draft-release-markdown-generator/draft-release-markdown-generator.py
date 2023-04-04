@@ -311,7 +311,7 @@ def calculate_changes(tag, changes, meta, file_order, module_order, artifacts_de
         final_str += "</details>" + "\n"
         final_str += "\n"
 
-    final_str += "### Chosing a jar" + "\n"
+    final_str += "## Choosing a JAR" + "\n"
     final_str += "\n"
     final_str += "There are multiple NoEncryption JARs available for download. Make sure you are using the right JAR that supports your server version. Artifacts titled <code>Source code</code> do not contain ready-to-use JAR files." + "\n"
     final_str += "\n"
