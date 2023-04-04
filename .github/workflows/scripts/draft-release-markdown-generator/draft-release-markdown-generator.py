@@ -70,7 +70,7 @@ class WebHandler:
     def download_file(url, destination):
         return urlretrieve(url, destination)
 
-def calculate_changes(tag, changes, meta, file_order, module_order, artifacts_detail):
+def calculate_changes(tag, previous, changes, meta, file_order, module_order, artifacts_detail):
     final_str = ""
 
     final_str += "# NoEncryption " + tag + "\n"
@@ -82,6 +82,10 @@ def calculate_changes(tag, changes, meta, file_order, module_order, artifacts_de
     final_str += "## Smaller Changes" + "\n"
     final_str += "\n"
     final_str += "- " + "\n"
+    final_str += "\n"
+    final_str += "## Detailed Change List" + "\n"
+    final_str += "\n"
+    final_str += "- " + f"https://github.com/Doclic/NoEncryption/compare/{previous}...{tag}" + "\n"
     final_str += "\n"
     final_str += "### Notable Modifications" + "\n"
     final_str += "\n"
@@ -311,7 +315,7 @@ def calculate_changes(tag, changes, meta, file_order, module_order, artifacts_de
         final_str += "</details>" + "\n"
         final_str += "\n"
 
-    final_str += "### Chosing a jar" + "\n"
+    final_str += "## Choosing a JAR" + "\n"
     final_str += "\n"
     final_str += "There are multiple NoEncryption JARs available for download. Make sure you are using the right JAR that supports your server version. Artifacts titled <code>Source code</code> do not contain ready-to-use JAR files." + "\n"
     final_str += "\n"
@@ -496,11 +500,13 @@ def main():
         )[0]
 
         latest_release_zipball_location = latest_release_json["zipball_url"]
+        previous_tag = latest_release_json["tag_name"]
     except:
         print("Could not connect to", latest_release_location)
         print("Using fallback values")
 
         fallback_latest_release_location = True
+        previous_tag = tag
 
     if fallback_latest_release_location:
         print("ZIP download skipped. Using local fallback")
@@ -654,7 +660,7 @@ def main():
         if name not in file_name_changes:
             file_name_changes[name] = {"status":"NONE", "paths":{"before":latest_meta_names.get(name), "after":new_meta_names.get(name)}}
 
-    markdown = calculate_changes(tag, file_name_changes, file_meta, file_order, module_order, artifacts_detail_file)
+    markdown = calculate_changes(tag, previous_tag, file_name_changes, file_meta, file_order, module_order, artifacts_detail_file)
 
     print("Moving changes to", markdown_output_file)
     FileUtils.write_file(markdown_output_file, markdown)
