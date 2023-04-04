@@ -351,16 +351,14 @@ def pre_main():
     arg_parser.add_argument("-n", "--new-meta", help="New meta location", default="../../../meta")
     arg_parser.add_argument("-r", "--repo", help="Repository to pull data from. Format: OWNER/REPO", default="Doclic/NoEncryption")
     arg_parser.add_argument("-t", "--tag", help="Release tag")
-    arg_parser.add_argument("-p", "--previous", help="Previous tag")
 
     args = arg_parser.parse_args()
 
-    global repository, new_meta, tag, previous
+    global repository, new_meta, tag
 
     repository = args.repo
     new_meta = args.new_meta
     tag = args.tag
-    previous = args.previous
 
     main()
 
@@ -502,11 +500,13 @@ def main():
         )[0]
 
         latest_release_zipball_location = latest_release_json["zipball_url"]
+        previous_tag = latest_release_json["tag_name"]
     except:
         print("Could not connect to", latest_release_location)
         print("Using fallback values")
 
         fallback_latest_release_location = True
+        previous_tag = tag
 
     if fallback_latest_release_location:
         print("ZIP download skipped. Using local fallback")
@@ -660,7 +660,7 @@ def main():
         if name not in file_name_changes:
             file_name_changes[name] = {"status":"NONE", "paths":{"before":latest_meta_names.get(name), "after":new_meta_names.get(name)}}
 
-    markdown = calculate_changes(tag, previous, file_name_changes, file_meta, file_order, module_order, artifacts_detail_file)
+    markdown = calculate_changes(tag, previous_tag, file_name_changes, file_meta, file_order, module_order, artifacts_detail_file)
 
     print("Moving changes to", markdown_output_file)
     FileUtils.write_file(markdown_output_file, markdown)
