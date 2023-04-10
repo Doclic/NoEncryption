@@ -79,7 +79,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-transport</artifactId>
-            <version>4.1.90.Final</version>
+            <version>4.1.91.Final</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
