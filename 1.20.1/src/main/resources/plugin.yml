@@ -1,0 +1,36 @@
+name: NoEncryption
+provides: [ ChatSignatures ]
+version: '${project.parent.version}'
+main: me.doclic.noencryption.NoEncryption
+api-version: '1.20'
+authors: [ Doclic, V1nc3ntWasTaken ]
+description: Strips signatures from player messages
+website: https://github.com/Doclic/NoEncryption
+
+commands:
+  noencryption:
+    aliases: [ne]
+    usage: /<command> help
+    permission: noencryption.usecommand
+
+permissions:
+  noencryption.*:
+    default: op
+    children:
+      - noencryption.usecommand
+      - noencryption.command.*
+
+  noencryption.usecommand:
+    default: true
+
+  noencryption.command.*:
+    default: op
+    children:
+      - noencryption.command.suppressnotices
+      - noencryption.command.checkforupdates
+
+  noencryption.command.suppressnotices:
+    default: op
+
+  noencryption.command.checkforupdates:
+    default: op

@@ -19,8 +19,12 @@
         "version-min": "1.19.4",
         "version-max": "1.19.4"
     },
+    "NoEncryption-1.20.1-{0}.jar": {
+        "version-min": "1.20.1",
+        "version-max": "1.20.1"
+    },
     "NoEncryption-Reflection-{0}.jar": {
         "version-min": "1.19",
-        "version-max": "1.19.4"
+        "version-max": "1.20.1"
     }
 }

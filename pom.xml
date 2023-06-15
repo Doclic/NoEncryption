@@ -24,6 +24,7 @@
         <module>1.19.2</module>
         <module>1.19.3</module>
         <module>1.19.4</module>
+        <module>1.20.1</module>
         <module>Reflection</module>
     </modules>
 

@@ -105,6 +105,15 @@ Do the applied changes require testing? (Depends on if core components were chan
   - [ ] Tested chat formatting (Using third party plugins such as TownyChat, EssentialsXChat, etc.)
   - [ ] Tested Reflection with above
   
+  <b>1.20.1 Tests</b>
+  - <b>Server Distribution</b> (CraftBukkit, Spigot, Purpur, and it's build number): 
+  - [ ] Tested player joining
+  - [ ] Tested chats **Player -> Server**
+  - [ ] Tested command chats **Player -> Server** (Using /tell, /me, /say, etc.)
+  - [ ] Tested chats **Server -> Player** (Using /say, /me, etc.)
+  - [ ] Tested chat formatting (Using third party plugins such as TownyChat, EssentialsXChat, etc.)
+  - [ ] Tested Reflection with above
+  
 </details>
 
 ## Self Review

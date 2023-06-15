@@ -189,6 +189,44 @@
             "children": []
         }
     },
+    "1.20.1": {
+        "noencryption.*": {
+            "name": "noencryption.*",
+            "description": "Permission to use all modules and commands in NoEncryption",
+            "default": "op",
+            "children": [
+                "noencryption.usecommand",
+                "noencryption.command.*"
+            ]
+        },
+        "noencryption.usecommand": {
+            "name": "noencryption.usecommand",
+            "description": "Permission to use /ne",
+            "default": "true",
+            "children": []
+        },
+        "noencryption.command.*": {
+            "name": "noencryption.command.*",
+            "description": "Permission to use all /ne subcommands",
+            "default": "op",
+            "children": [
+                "noencryption.command.suppressnotices",
+                "noencryption.command.checkforupdates"
+            ]
+        },
+        "noencryption.command.suppressnotices": {
+            "name": "noencryption.command.suppressnotices",
+            "description": "Permission to use /ne suppressnotices",
+            "default": "op",
+            "children": []
+        },
+        "noencryption.command.checkforupdates": {
+            "name": "noencryption.command.checkforupdates",
+            "description": "Permission to use /ne checkforupdates",
+            "default": "op",
+            "children": []
+        }
+    },
     "Reflection": {
         "noencryption.*": {
             "name": "noencryption.*",

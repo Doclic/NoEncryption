@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 
 public class Compatibility {
     public static final MinecraftVersion MIN_VERSION = new MinecraftVersion(1, 19);
-    public static final MinecraftVersion MAX_VERSION = new MinecraftVersion(1, 19, 4);
+    public static final MinecraftVersion MAX_VERSION = new MinecraftVersion(1, 20, 1);
     public static final MinecraftVersion SERVER_VERSION;
     public static final VersionHandler VERSION_HANDLER;
     public static final boolean SERVER_COMPATIBLE;
