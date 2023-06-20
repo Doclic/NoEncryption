@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>NoEncryption-Reflection</artifactId>
-    <version>5.2</version>
+    <version>5.3</version>
     <packaging>jar</packaging>
 
     <name>NoEncryption-Reflection</name>
@@ -15,7 +15,7 @@
     <parent>
         <groupId>me.doclic</groupId>
         <artifactId>NoEncryption</artifactId>
-        <version>5.2</version>
+        <version>5.3</version>
     </parent>
 
     <build>

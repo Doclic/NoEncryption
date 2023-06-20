@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>NoEncryption-1.19.4</artifactId>
-    <version>5.2</version>
+    <version>5.3</version>
     <packaging>jar</packaging>
 
     <name>NoEncryption-1.19.4</name>
@@ -15,7 +15,7 @@
     <parent>
         <groupId>me.doclic</groupId>
         <artifactId>NoEncryption</artifactId>
-        <version>5.2</version>
+        <version>5.3</version>
     </parent>
 
     <build>
